@@ -35,8 +35,6 @@ public class InputManager : Singleton<InputManager>
 
     private void StartTouch(InputAction.CallbackContext context)
     {
-        Debug.Log("Touch started" + touchControl.Touch.TouchPosition.ReadValue<Vector2>());
-
         if (OnStartTouch != null)
         {
             OnStartTouch(touchControl.Touch.TouchPosition.ReadValue<Vector2>(), (float)context.startTime);
@@ -45,7 +43,6 @@ public class InputManager : Singleton<InputManager>
 
     private void EndTouch(InputAction.CallbackContext context)
     {
-        Debug.Log("Touch ended");
         if (OnEndTouch != null)
         {
             OnEndTouch(touchControl.Touch.TouchPosition.ReadValue<Vector2>(), (float)context.time);
