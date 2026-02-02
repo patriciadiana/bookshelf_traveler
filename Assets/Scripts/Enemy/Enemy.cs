@@ -1,43 +1,53 @@
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed;
-    public float stoppingDistance;
-    public float retreatDistance;
+    public GameObject player;
 
-    public Transform player;
+    private float distance;
+    public float speed;
+    public float distanceOffset;
+    private Vector2 lastPosition;
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        lastPosition = transform.position;
     }
 
     private void Update()
     {
-        if(Vector2.Distance(transform.position, player.position) > stoppingDistance)
+        distance = Vector2.Distance(transform.position, player.transform.position);
+        Vector2 direction = player.transform.position - transform.position;
+        direction.Normalize();
+
+        if(distance < distanceOffset)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-        }
-        else if(Vector2.Distance(transform.position, player.position) < stoppingDistance
-            && Vector2.Distance(transform.position, player.position) > retreatDistance)
-        {
-            transform.position = this.transform.position;
-        }
-        else if(Vector2.Distance(transform.position, player.position) < retreatDistance)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
+            MoveTowardsPlayer();
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void MoveTowardsPlayer()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, stoppingDistance);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, retreatDistance);
+        transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+        HandleMovement();
     }
 
+    /*Function for when the player leaves the range*/
+    private void MoveAwayFromPlayer()
+    {
+        Vector2 direction = transform.position - player.transform.position;
+        direction.Normalize();
+        transform.position = Vector2.MoveTowards(transform.position, (Vector2)transform.position + direction, speed * Time.deltaTime);
+        HandleMovement();
+    }
+
+    private void HandleMovement()
+    {
+        Vector2 currentPosition = transform.position;
+        float velocity = ((currentPosition - lastPosition) / Time.deltaTime).magnitude;
+
+        lastPosition = currentPosition;
+    }
 }
