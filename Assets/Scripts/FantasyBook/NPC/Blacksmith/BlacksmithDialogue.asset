@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 413cda14175d0504b98bfd07d74863af, type: 3}
+  m_Name: BlacksmithDialogue
+  m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
+  npcName: John
+  npcPortrait: {fileID: 5118936737195724037, guid: c17b4b3c8af5e194ebb1121684e9eda9, type: 3}
+  dialogueLines:
+  - ceau!
+  - ce faci?
+  autoProgressLines: 0100
+  autoProgressDelay: 1.5
+  typingSpeed: 0.05
+  voiceSound: {fileID: 0}
+  voicePitch: 1

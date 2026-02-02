@@ -9,6 +9,7 @@ public class CameraFollow : MonoBehaviour
 
     private Camera cam;
     private Bounds bounds;
+    private Bounds originalBounds;
 
     private void Start()
     {
@@ -21,23 +22,17 @@ public class CameraFollow : MonoBehaviour
 
     private void CalculateCameraBounds()
     {
-        bounds = cameraBoundsCollider.bounds;
+        originalBounds = cameraBoundsCollider.bounds;
 
-        float cameraHeight = cam.orthographicSize * 2f;
-        float cameraWidth = cameraHeight * cam.aspect;
+        float camHeight = cam.orthographicSize;
+        float camWidth = camHeight * cam.aspect;
 
-        bounds.min = new Vector3(
-            bounds.min.x + cameraWidth / 2f,
-            bounds.min.y + cameraHeight / 2f,
-            bounds.min.z
-        );
+        bounds = originalBounds;
 
-        bounds.max = new Vector3(
-            bounds.max.x - cameraWidth / 2f,
-            bounds.max.y - cameraHeight / 2f,
-            bounds.max.z
-        );
+        bounds.min += new Vector3(camWidth, camHeight, 0f);
+        bounds.max -= new Vector3(camWidth, camHeight, 0f);
     }
+
 
     public void UpdateCameraBounds(PolygonCollider2D newBounds)
     {
@@ -74,14 +69,28 @@ public class CameraFollow : MonoBehaviour
 
     private Vector3 ClampToBounds(Vector3 position)
     {
-        if (bounds.size == Vector3.zero && cameraBoundsCollider != null)
+        float camHeight = cam.orthographicSize;
+        float camWidth = camHeight * cam.aspect;
+
+        if (originalBounds.size.x <= camWidth * 2f)
         {
-            CalculateCameraBounds();
+            position.x = originalBounds.center.x;
+        }
+        else
+        {
+            position.x = Mathf.Clamp(position.x, bounds.min.x, bounds.max.x);
         }
 
-        position.x = Mathf.Clamp(position.x, bounds.min.x, bounds.max.x);
-        position.y = Mathf.Clamp(position.y, bounds.min.y, bounds.max.y);
+        if (originalBounds.size.y <= camHeight * 2f)
+        {
+            position.y = originalBounds.center.y;
+        }
+        else
+        {
+            position.y = Mathf.Clamp(position.y, bounds.min.y, bounds.max.y);
+        }
 
         return position;
     }
+
 }
