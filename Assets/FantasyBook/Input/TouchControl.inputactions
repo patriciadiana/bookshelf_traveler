@@ -89,6 +89,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Gamepad",
+            "id": "9319bb7c-cd5e-42d0-8908-b9a497a0aa5b",
+            "actions": [
+                {
+                    "name": "Walk",
+                    "type": "Button",
+                    "id": "bddf5b23-0391-451b-8218-4eee97b2cdeb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "67642f9b-b44a-47d2-ae94-e95b550443ab",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

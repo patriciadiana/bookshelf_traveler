@@ -4,6 +4,7 @@ public class BreakableObject : MonoBehaviour, IInteractable
 {
     [SerializeField] private int hitsRequired = 5;
     [SerializeField] private Sprite brokenSprite;
+    [SerializeField] private GameObject itemUIPrefab;
 
     private int hits;
     private SpriteRenderer spriteRenderer;
@@ -37,5 +38,11 @@ public class BreakableObject : MonoBehaviour, IInteractable
     {
         isBroken = true;
         spriteRenderer.sprite = brokenSprite;
+
+        InventoryItem itemData = gameObject.AddComponent<InventoryItem>();
+        itemData.itemUIPrefab = itemUIPrefab;
+
+        gameObject.tag = "Item";
+        GetComponent<Collider2D>().isTrigger = true;
     }
 }
