@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour
+public class SlotComponent : MonoBehaviour
 {
     public GameObject currentItem;
 
@@ -14,14 +13,5 @@ public class InventorySlot : MonoBehaviour
     {
         currentItem = Instantiate(itemPrefab, transform);
         currentItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-    }
-
-    public void ClearSlot()
-    {
-        if (currentItem != null)
-        {
-            Destroy(currentItem);
-            currentItem = null;
-        }
     }
 }
