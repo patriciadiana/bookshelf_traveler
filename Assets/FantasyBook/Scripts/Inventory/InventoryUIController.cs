@@ -1,27 +1,26 @@
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-public class InventoryController : MonoBehaviour
+public class InventoryUIController : MonoBehaviour
 {
     public GameObject inventoryPanel;
     public GameObject slotPrefab;
     public int slotCount;
 
-    private List<InventorySlot> slots = new List<InventorySlot>();
+    private List<SlotComponent> slots = new List<SlotComponent>();
 
     private void Start()
     {
-        for (int i = 0; i < slotCount; i++)
+        for(int i = 0; i < slotCount; i++)
         {
-            InventorySlot slot = Instantiate(slotPrefab, inventoryPanel.transform).GetComponent<InventorySlot>();
+            SlotComponent slot = Instantiate(slotPrefab, inventoryPanel.transform).GetComponent<SlotComponent>();
             slots.Add(slot);
-        }
+        }   
     }
 
     public bool AddItem(GameObject itemPrefab)
     {
-        for (int i = slots.Count - 1; i >= 0; i--)
+        for(int i = slots.Count - 1; i >= 0; i--)
         {
             if (slots[i].IsEmpty())
             {
@@ -29,8 +28,7 @@ public class InventoryController : MonoBehaviour
                 return true;
             }
         }
-
-        Debug.Log("Inventory full!");
+        Debug.Log("Inventory full");
         return false;
     }
 }

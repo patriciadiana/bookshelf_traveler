@@ -2,10 +2,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueController : Singleton<DialogueController>
+public class DialogueUIController : Singleton<DialogueUIController>
 {
     public GameObject dialoguePanel;
-    public TextMeshProUGUI dialogueText, nameText;
+    public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI nameText;
     public Image portraitImage;
 
     public Transform choiceContainer;
