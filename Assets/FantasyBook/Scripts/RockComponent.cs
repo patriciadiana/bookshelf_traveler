@@ -6,7 +6,7 @@ public class RockComponent : MonoBehaviour
     public Sprite brokenSprite;
 
     public InventoryComponent playerInventory;
-    public ItemComponent rockItem;
+    public ItemData rockItem;
 
     [HideInInspector] public int hits;
     [HideInInspector] public bool isBroken;

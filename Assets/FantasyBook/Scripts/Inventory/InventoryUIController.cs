@@ -18,17 +18,31 @@ public class InventoryUIController : MonoBehaviour
         }   
     }
 
-    public bool AddItem(GameObject itemPrefab)
+    public bool AddItem(ItemData item)
     {
-        for(int i = slots.Count - 1; i >= 0; i--)
+        for (int i = slots.Count - 1; i >= 0; i--)
         {
             if (slots[i].IsEmpty())
             {
-                slots[i].SetItem(itemPrefab);
+                slots[i].SetItem(item);
                 return true;
             }
         }
+
         Debug.Log("Inventory full");
         return false;
     }
+
+    public void Refresh(List<ItemData> items)
+    {
+        foreach (var slot in slots)
+            slot.Clear();
+
+
+        for (int i = 0; i < items.Count && i < slots.Count; i++)
+        {
+            slots[slots.Count - 1 - i].SetItem(items[i]);
+        }
+    }
+
 }

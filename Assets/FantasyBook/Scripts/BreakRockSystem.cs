@@ -10,12 +10,17 @@ public class BreakRockSystem : MonoBehaviour
 
         rock.hits--;
 
-        if (rock.hits <= 0)
-        {
-            rock.isBroken = true;
-            entity.GetComponent<SpriteRenderer>().sprite = rock.brokenSprite;
+        if (rock.hits > 0)
+            return;
 
-            InventorySystem.AddItem(rock.playerInventory, rock.rockItem);
+        rock.isBroken = true;
+
+        SpriteRenderer renderer = entity.GetComponent<SpriteRenderer>();
+        if (renderer != null)
+        {
+            renderer.sprite = rock.brokenSprite;
         }
+
+        InventorySystem.AddItem(rock.playerInventory, rock.rockItem);
     }
 }

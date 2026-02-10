@@ -4,24 +4,16 @@ public class InventorySystem : Singleton<InventorySystem>
 {
     public InventoryUIController inventoryUI;
 
-    public static void AddItem(InventoryComponent inventory, ItemComponent item)
+    public static void AddItem(InventoryComponent inventory, ItemData item)
     {
-        if(inventory.items.Count < inventory.capacity)
-        {
-            inventory.items.Add(item);
-
-            if (Instance.inventoryUI != null)
-            {
-                Instance.inventoryUI.AddItem(item.itemPrefab);
-            }
-            else
-            {
-                Debug.Log("UI or prefab is null!");
-            }
-        }
-        else
+        if (inventory.items.Count >= inventory.capacity)
         {
             Debug.Log("Inventory is full");
+            return;
         }
+
+        inventory.items.Add(item);
+        Instance.inventoryUI?.AddItem(item);
     }
+
 }
