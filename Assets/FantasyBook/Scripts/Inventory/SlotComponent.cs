@@ -1,17 +1,36 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SlotComponent : MonoBehaviour
 {
-    public GameObject currentItem;
+    public Image icon;
+    private ItemData item;
 
-    public bool IsEmpty()
+    public bool IsEmpty() => item == null;
+
+    public void SetItem(ItemData newItem)
     {
-        return currentItem == null;
+        item = newItem;
+
+        Debug.Log(
+            $"Slot SetItem: {item.itemId}, " +
+            $"Icon: {(item.icon != null ? item.icon.name : "NULL")}"
+        );
+
+        if (icon != null && item.icon != null)
+        {
+            icon.sprite = item.icon;
+            icon.enabled = true;
+        }
     }
 
-    public void SetItem(GameObject itemPrefab)
+    public void Clear()
     {
-        currentItem = Instantiate(itemPrefab, transform);
-        currentItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        item = null;
+        if (icon != null)
+        {
+            icon.sprite = null;
+            icon.enabled = false;
+        }
     }
 }
