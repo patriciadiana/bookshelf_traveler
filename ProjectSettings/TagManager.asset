@@ -9,7 +9,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 
@@ -50,6 +50,18 @@ TagManager:
     locked: 0
   - name: Collision
     uniqueID: 510565461
+    locked: 0
+  - name: 1Sky
+    uniqueID: 263721803
+    locked: 0
+  - name: 2Cloud
+    uniqueID: 3206643847
+    locked: 0
+  - name: 3Trees
+    uniqueID: 3241251905
+    locked: 0
+  - name: 4Trees
+    uniqueID: 2446406311
     locked: 0
   - name: Player
     uniqueID: 3873682739
