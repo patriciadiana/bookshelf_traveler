@@ -3,35 +3,23 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField]
-    private float startingHealth;
     public float currentHealth { get; private set; }
 
     private void Awake()
     {
-        currentHealth = startingHealth;
-    }
-    private void Start()
-    {
-        ResetHealth();
+        currentHealth = HealthManager.Instance.maxHealth;
     }
 
-    public void TakeDamange(float damage)
+    public void TakeDamage(float damage)
     {
-        currentHealth = Mathf.Clamp(currentHealth - damage, 0, startingHealth);
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, HealthManager.Instance.maxHealth);
 
-        if (currentHealth > 0)
-        {
+        HealthManager.Instance.playerHealth = currentHealth;
 
-        }
-        else
+        if (currentHealth <= 0)
         {
             Debug.Log("Player died");
         }
-    }
-
-    public void ResetHealth()
-    {
-        currentHealth = startingHealth;
     }
 }

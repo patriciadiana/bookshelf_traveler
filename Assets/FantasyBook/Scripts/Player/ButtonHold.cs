@@ -8,18 +8,52 @@ public class ButtonHold : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     [SerializeField] private ButtonType buttonType;
     [SerializeField] private PlayerSideScrollerMovement player;
 
+    private static bool isLeftPressed = false;
+    private static bool isRightPressed = false;
+
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (buttonType == ButtonType.Left)
-            player.MoveLeft();
-        else if (buttonType == ButtonType.Right)
-            player.MoveRight();
-        else if (buttonType == ButtonType.Jump)
-            player.Jump();
+        switch (buttonType)
+        {
+            case ButtonType.Left:
+                isLeftPressed = true;
+                player.MoveLeft();
+                break;
+            case ButtonType.Right:
+                isRightPressed = true;
+                player.MoveRight();
+                break;
+            case ButtonType.Jump:
+                player.Jump();
+                break;
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        player.StopMoving();
+        switch (buttonType)
+        {
+            case ButtonType.Left:
+                isLeftPressed = false;
+                UpdateMovement();
+                break;
+            case ButtonType.Right:
+                isRightPressed = false;
+                UpdateMovement();
+                break;
+            case ButtonType.Jump:
+
+                break;
+        }
+    }
+
+    private void UpdateMovement()
+    {
+        if (isLeftPressed)
+            player.MoveLeft();
+        else if (isRightPressed)
+            player.MoveRight();
+        else
+            player.StopMoving();
     }
 }

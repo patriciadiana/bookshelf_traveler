@@ -12,6 +12,9 @@ public class MoveCharacter : MonoBehaviour
     private Vector2 currentMoveDirection;
 
     public CameraFollow cameraFollow;
+
+    private bool canMove = true;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -25,7 +28,7 @@ public class MoveCharacter : MonoBehaviour
 
     private void HandleMovement()
     {
-        if (pathVectorList != null && currentPathIndex < pathVectorList.Count)
+        if (canMove && pathVectorList != null && currentPathIndex < pathVectorList.Count)
         {
             Vector3 targetPosition = pathVectorList[currentPathIndex];
 
@@ -76,6 +79,17 @@ public class MoveCharacter : MonoBehaviour
 
         currentPathIndex = 0;
         pathVectorList = new List<Vector3>(path);
+    }
+
+    public void SetCanMove(bool value)
+    {
+        canMove = value;
+        if (!canMove) StopMoving();
+    }
+
+    public bool GetCanMove()
+    {
+        return canMove;
     }
 
     public bool IsMoving()

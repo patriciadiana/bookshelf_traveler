@@ -15,19 +15,25 @@ MonoBehaviour:
   npcName: Blacksmith
   npcPortrait: {fileID: 5118936737195724037, guid: c17b4b3c8af5e194ebb1121684e9eda9, type: 3}
   dialogueLines:
-  - Hello!
-  - How are you?
-  - Im glad
-  - That's bad
-  autoProgressLines: 01010101
-  endDialogueLines: 00000101
+  - Hmph. You're not from here... I can see it in your eyes.
+  - You've heard about the dragon, haven't you?
+  - It circles the skies at dusk. Burns fields. Terrorizing the village.
+  - Steel alone won't do. The only way is hidden deep in the northern cave where
+    lies a rare ore.
+  - Follow the path and you shall find the cave. Beware... the cave isn't empty.
+    Slimes infest it now, guarding the ore like it's part of them.
+  autoProgressLines: 0101010101
+  endDialogueLines: 0000000001
   autoProgressDelay: 1.5
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
   voicePitch: 1
   choices:
-  - dialogueIndex: 1
+  - dialogueIndex: 2
     choices:
-    - Fine
-    - Not fine
-    nextDialogueIndex: 0200000003000000
+    - How can it be defeated?
+    nextDialogueIndex: 03000000
+  - dialogueIndex: 3
+    choices:
+    - Tell me more about this ore.
+    nextDialogueIndex: 05000000
