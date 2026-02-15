@@ -52,7 +52,7 @@ public class AttackPlayer : MonoBehaviour
     {
         if (playerHealth != null)
         {
-            playerHealth.TakeDamange(attackDamage);
+            playerHealth.TakeDamage(attackDamage);
             lastAttackTime = Time.time;
         }
     }

@@ -4,10 +4,12 @@ using UnityEngine;
 public class DialogueSystem : Singleton<DialogueSystem>
 {
     private DialogueUIController ui;
+    private MoveCharacter playerMove;
 
     private void Awake()
     {
         ui = DialogueUIController.Instance;
+        playerMove = FindFirstObjectByType<MoveCharacter>();
     }
 
     public void HandleInteraction(DialogueComponent dialogue)
@@ -20,6 +22,9 @@ public class DialogueSystem : Singleton<DialogueSystem>
 
     void StartDialogue(DialogueComponent dialogue)
     {
+        if (playerMove != null)
+            playerMove.SetCanMove(false);
+
         dialogue.isDialogueActive = true;
         dialogue.dialogueIndex = 0;
 
@@ -115,11 +120,14 @@ public class DialogueSystem : Singleton<DialogueSystem>
         DisplayCurrentLine(dialogue);
     }
 
-    void EndDialogue(DialogueComponent dialogue)
+    public void EndDialogue(DialogueComponent dialogue)
     {
         StopAllCoroutines();
         dialogue.isDialogueActive = false;
         ui.SetDialogueText("");
         ui.ShowDialogueUI(false);
+
+        if (playerMove != null)
+            playerMove.SetCanMove(true);
     }
 }
