@@ -3,10 +3,10 @@ using UnityEngine;
 public class AttackPlayer : MonoBehaviour
 {
     public float attackRange = 0.6f;
-    public float attackDamage = 1f;
+    public float attackDamage = 0.1f;
     public float attackCooldown = 1.5f;
 
-    private Health playerHealth;
+    private PlayerHealth playerHealth;
     private bool isPlayerInRange = false;
     private float lastAttackTime;
 
@@ -31,7 +31,7 @@ public class AttackPlayer : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            playerHealth = collision.GetComponent<Health>();
+            playerHealth = collision.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
                 isPlayerInRange = true;

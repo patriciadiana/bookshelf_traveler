@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class ButtonHold : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    public enum ButtonType { Left, Right, Jump }
+    public enum ButtonType { Left, Right, Jump, Attack }
 
     [SerializeField] private ButtonType buttonType;
     [SerializeField] private PlayerSideScrollerMovement player;
@@ -25,6 +25,9 @@ public class ButtonHold : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                 break;
             case ButtonType.Jump:
                 player.Jump();
+                break;
+            case ButtonType.Attack:
+                player.Attack();
                 break;
         }
     }

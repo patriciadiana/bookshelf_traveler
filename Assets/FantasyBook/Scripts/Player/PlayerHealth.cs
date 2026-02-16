@@ -1,19 +1,18 @@
 using System;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
     public float currentHealth { get; private set; }
 
     private void Awake()
     {
-        currentHealth = HealthManager.Instance.maxHealth;
+        currentHealth = HealthManager.Instance.maxHealthPlayer;
     }
 
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, HealthManager.Instance.maxHealth);
 
         HealthManager.Instance.playerHealth = currentHealth;
 

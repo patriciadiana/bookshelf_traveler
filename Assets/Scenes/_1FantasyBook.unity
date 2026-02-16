@@ -646,7 +646,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.3
+  m_FillAmount: 0.5
   m_FillClockwise: 1
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
@@ -871,9 +871,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Testing
   moveCharacter: {fileID: 1021417692}
-  uiLayerMask:
-    serializedVersion: 2
-    m_Bits: 32
 --- !u!4 &188546170
 Transform:
   m_ObjectHideFlags: 0
@@ -930,7 +927,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   playerHealth: 0
-  maxHealth: 5
+  enemyHealth: 0
+  maxHealthPlayer: 5
+  maxHealthEnemy: 100
 --- !u!1 &197225601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1346,7 +1345,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.3
+  m_FillAmount: 0.5
   m_FillClockwise: 1
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
@@ -8745,10 +8744,10 @@ GameObject:
   - component: {fileID: 1021417694}
   - component: {fileID: 1021417693}
   - component: {fileID: 1021417695}
-  - component: {fileID: 1021417696}
   - component: {fileID: 1021417698}
   - component: {fileID: 1021417697}
   - component: {fileID: 1021417699}
+  - component: {fileID: 1021417700}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -9002,18 +9001,6 @@ MonoBehaviour:
   m_DefaultActionMap: Touch
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1021417696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1021417686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 770b0c502b4c7654a8ccae2435a26b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
 --- !u!114 &1021417697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9058,6 +9045,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventoryComponent
   capacity: 3
   items: []
+--- !u!114 &1021417700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021417686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4a1c91af7b0e5f4aaae68bf215f032f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
 --- !u!1 &1023593991
 GameObject:
   m_ObjectHideFlags: 0

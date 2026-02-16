@@ -12,6 +12,7 @@ public class PlayerSideScrollerMovement : MonoBehaviour
     private float moveDirection = 0f;
     private float lastDirection = 1f;
 
+    private bool isAttacking = false;
 
     private void Awake()
     {
@@ -45,6 +46,12 @@ public class PlayerSideScrollerMovement : MonoBehaviour
         }
     }
 
+    public void Attack()
+    {
+        if (isAttacking) return;
+        isAttacking = true;
+    }
+
     public void MoveLeft()
     {
         moveDirection = -1f;
@@ -61,6 +68,24 @@ public class PlayerSideScrollerMovement : MonoBehaviour
     {
         moveDirection = 0f;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!isAttacking) return;
+
+        Debug.Log(isAttacking);
+
+        if (collision.CompareTag("Dragon"))
+        {
+            DragonHealth dragon = collision.GetComponent<DragonHealth>();
+            if (dragon != null)
+            {
+                dragon.TakeDamage(10f);
+                isAttacking = false;
+            }
+        }
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
