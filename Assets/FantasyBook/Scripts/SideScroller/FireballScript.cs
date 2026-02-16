@@ -6,7 +6,7 @@ public class FireballScript : MonoBehaviour
     private Rigidbody2D rb;
     public float force;
 
-    private Health playerHealth;
+    private PlayerHealth playerHealth;
     public float attackDamage = 1f;
 
     private void Start()
@@ -25,7 +25,7 @@ public class FireballScript : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            playerHealth = collision.GetComponent<Health>();
+            playerHealth = collision.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(attackDamage);
