@@ -20,7 +20,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
             StartDialogue(dialogue);
     }
 
-    void StartDialogue(DialogueComponent dialogue)
+    public void StartDialogue(DialogueComponent dialogue)
     {
         if (playerMove != null)
             playerMove.SetCanMove(false);

@@ -14,6 +14,7 @@ public class InventorySystem : Singleton<InventorySystem>
 
         inventory.items.Add(item);
         Instance.inventoryUI?.AddItem(item);
-    }
 
+        Instance.inventoryUI.Refresh(inventory.items);
+    }
 }

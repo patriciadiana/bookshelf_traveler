@@ -5,14 +5,17 @@ public class PlayerSideScrollerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 8f;
 
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private float attackRange = 1f;
+    [SerializeField] private float attackDamage = 10f;
+
+    private bool isAttacking;
     private bool isJumping;
 
     private Rigidbody2D rb;
     private Animator animator;
     private float moveDirection = 0f;
     private float lastDirection = 1f;
-
-    private bool isAttacking = false;
 
     private void Awake()
     {
@@ -49,8 +52,30 @@ public class PlayerSideScrollerMovement : MonoBehaviour
     public void Attack()
     {
         if (isAttacking) return;
+
         isAttacking = true;
+
+        //animator.SetTrigger("Attack");
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(
+            attackPoint.position,
+            attackRange);
+
+        foreach (Collider2D hit in hits)
+        {
+            if (hit.CompareTag("Dragon"))
+            {
+                DragonHealth dragon = hit.GetComponent<DragonHealth>();
+                if (dragon != null)
+                {
+                    dragon.TakeDamage(attackDamage);
+                }
+            }
+        }
+
+        isAttacking = false;
     }
+
 
     public void MoveLeft()
     {
@@ -68,24 +93,6 @@ public class PlayerSideScrollerMovement : MonoBehaviour
     {
         moveDirection = 0f;
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!isAttacking) return;
-
-        Debug.Log(isAttacking);
-
-        if (collision.CompareTag("Dragon"))
-        {
-            DragonHealth dragon = collision.GetComponent<DragonHealth>();
-            if (dragon != null)
-            {
-                dragon.TakeDamage(10f);
-                isAttacking = false;
-            }
-        }
-    }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

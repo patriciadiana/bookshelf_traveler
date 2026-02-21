@@ -1,5 +1,6 @@
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class MoveCharacter : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class MoveCharacter : MonoBehaviour
 
     public CameraFollow cameraFollow;
 
+    private bool isAttacking = false;
     private bool canMove = true;
 
     private void Start()
@@ -81,10 +83,34 @@ public class MoveCharacter : MonoBehaviour
         pathVectorList = new List<Vector3>(path);
     }
 
+    public void StartAttack()
+    {
+        if (isAttacking) return;
+
+        isAttacking = true;
+        StopMoving();
+
+        pathVectorList = null;
+        currentPathIndex = 0;
+
+        StartCoroutine(AttackRoutine());
+    }
+
+    private IEnumerator AttackRoutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        isAttacking = false;
+    }
+
     public void SetCanMove(bool value)
     {
         canMove = value;
         //if (!canMove) StopMoving();
+    }
+
+    public bool GetIsAttacking()
+    {
+        return isAttacking;
     }
 
     public bool GetCanMove()

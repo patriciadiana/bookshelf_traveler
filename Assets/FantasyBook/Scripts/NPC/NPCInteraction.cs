@@ -8,6 +8,11 @@ using UnityEngine.UI;
 public class NPCInteraction : MonoBehaviour, IInteractable
 {
     private DialogueComponent dialogue;
+    public NPCDialogue rewardDialogue;
+    public NPCDialogue defaultDialogue;
+    public ItemData swordItem;
+
+    private bool hasSpokenOnce = false;
 
     private void Awake()
     {
@@ -21,10 +26,17 @@ public class NPCInteraction : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (dialogue == null || dialogue.dialogueData == null)
+        if (dialogue == null)
             return;
 
         InventoryComponent playerInventory = FindFirstObjectByType<InventoryComponent>();
+
+        if (!hasSpokenOnce)
+        {
+            DialogueSystem.Instance.HandleInteraction(dialogue);
+            hasSpokenOnce = true;
+            return;
+        }
 
         if (playerInventory != null)
         {
@@ -35,13 +47,31 @@ public class NPCInteraction : MonoBehaviour, IInteractable
             {
                 playerInventory.items.Remove(diamondItem);
 
-                SceneManager.LoadScene("_2DragonBattle");
+                dialogue.dialogueData = rewardDialogue;
+
+                DialogueSystem.Instance.HandleInteraction(dialogue);
+
+                StartCoroutine(GiveSwordAfterDialogue(playerInventory));
+
                 return;
             }
         }
 
+        dialogue.dialogueData = defaultDialogue;
+
         DialogueSystem.Instance.HandleInteraction(dialogue);
     }
+
+    private IEnumerator GiveSwordAfterDialogue(InventoryComponent playerInventory)
+    {
+        while (dialogue.isDialogueActive)
+        {
+            yield return null;
+        }
+
+        InventorySystem.AddItem(playerInventory, swordItem);
+    }
+
 
     public void Close()
     {
