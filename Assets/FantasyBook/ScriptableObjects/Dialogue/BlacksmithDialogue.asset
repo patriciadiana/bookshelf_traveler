@@ -36,4 +36,4 @@ MonoBehaviour:
   - dialogueIndex: 3
     choices:
     - Tell me more about this ore.
-    nextDialogueIndex: 05000000
+    nextDialogueIndex: 04000000

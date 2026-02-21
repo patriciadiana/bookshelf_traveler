@@ -1,0 +1,41 @@
+using NUnit.Framework.Internal.Execution;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class WoodenSignInteraction : MonoBehaviour, IInteractable
+{
+    private InventoryComponent playerInventory;
+    private DialogueComponent dialogue;
+
+    private void Start()
+    {
+        playerInventory = FindFirstObjectByType<InventoryComponent>();
+        dialogue = GetComponent<DialogueComponent>();
+    }
+    public bool CanInteract()
+    {
+        return dialogue != null && !dialogue.isDialogueActive;
+    }
+
+    public void Interact()
+    {
+        if (dialogue == null || dialogue.dialogueData == null)
+            return;
+
+        if (playerInventory != null)
+        {
+            ItemData swordItem = playerInventory.items
+                .Find(item => item.itemId == "sword");
+
+            if (swordItem != null)
+            {
+                SceneManager.LoadScene("_2DragonBattle");
+                return;
+            }
+            else
+            {
+                DialogueSystem.Instance.HandleInteraction(dialogue);
+            }
+        }
+    }
+}
