@@ -5,7 +5,9 @@ public class DragonBossRoutine : MonoBehaviour
     [Header("Bullet Settings")]
     public GameObject bullet;
     public Transform bulletPos;
-    public float shootInterval = 2f;
+    public Transform bulletPosFront;
+    public Transform bulletPosSide;
+    public float shootInterval = 1f;
 
     [Header("Movement Settings")]
     public float speed = 2f;
@@ -20,6 +22,14 @@ public class DragonBossRoutine : MonoBehaviour
 
     [Header("State")]
     public bool isAlive = true;
+
+    [Header("Sprites")]
+    public SpriteRenderer spriteRenderer;
+    public Sprite frontSprite;
+    public Sprite sideSprite;
+
+    [Header("Animations")]
+    private Animator animator;
 
     private float timer;
     private float shootTimer;
@@ -36,6 +46,8 @@ public class DragonBossRoutine : MonoBehaviour
     {
         initialPos = transform.position;
         skyPos = new Vector3(transform.position.x, skyY, transform.position.z);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         targetPos = skyPos;
     }
 
@@ -77,6 +89,11 @@ public class DragonBossRoutine : MonoBehaviour
                 if (Vector3.Distance(transform.position, targetPos) < 0.1f)
                 {
                     targetPos = new Vector3(transform.position.x, groundY, transform.position.z);
+
+                    spriteRenderer.sprite = sideSprite;
+                    animator.SetBool("isLowering", true);
+                    bulletPos = bulletPosSide;
+
                     currentState = State.LowerToGround;
                     timer = 0;
                 }
@@ -84,6 +101,7 @@ public class DragonBossRoutine : MonoBehaviour
 
             case State.LowerToGround:
                 transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+
                 if (Mathf.Abs(transform.position.y - groundY) < 0.1f)
                 {
                     currentState = State.Grounded;
@@ -117,6 +135,11 @@ public class DragonBossRoutine : MonoBehaviour
                 {
                     targetPos = new Vector3(transform.position.x, skyY - 2f, transform.position.z);
                     currentState = State.LowerInSky;
+
+                    animator.SetBool("isLowering", false);
+                    spriteRenderer.sprite = frontSprite;
+                    bulletPos = bulletPosFront;
+
                     timer = 0;
                 }
                 break;
@@ -135,8 +158,13 @@ public class DragonBossRoutine : MonoBehaviour
 
     void HandleShooting()
     {
-        if (currentState == State.InSky)
+        if (currentState == State.InSky || currentState == State.Grounded)
         {
+            if(currentState == State.Grounded)
+            {
+                shootInterval = 2f;
+            }
+
             shootTimer += Time.deltaTime;
             if (shootTimer > shootInterval)
             {

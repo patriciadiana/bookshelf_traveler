@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerSideScrollerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float jumpForce = 8f;
+    [SerializeField] private float jumpForce = 14f;
 
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRange = 1f;
@@ -25,7 +25,9 @@ public class PlayerSideScrollerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveDirection * moveSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(
+            moveDirection * moveSpeed,
+            rb.linearVelocity.y);
     }
 
     private void Update()
@@ -39,12 +41,14 @@ public class PlayerSideScrollerMovement : MonoBehaviour
         animator.SetFloat("InputX", animInputX);
     }
 
-
     public void Jump()
     {
         if (!isJumping)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
             isJumping = true;
         }
     }
@@ -54,8 +58,6 @@ public class PlayerSideScrollerMovement : MonoBehaviour
         if (isAttacking) return;
 
         isAttacking = true;
-
-        //animator.SetTrigger("Attack");
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(
             attackPoint.position,
@@ -75,7 +77,6 @@ public class PlayerSideScrollerMovement : MonoBehaviour
 
         isAttacking = false;
     }
-
 
     public void MoveLeft()
     {

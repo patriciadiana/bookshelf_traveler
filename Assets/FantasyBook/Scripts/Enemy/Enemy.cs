@@ -15,22 +15,28 @@ public class Enemy : MonoBehaviour, IInteractable
     public float speed;
     public float distanceOffset;
     private Vector2 lastPosition;
+    private float damageTaken = 1f;
 
-    [SerializeField] private int maxHealth = 3;
     [SerializeField] private float knockbackForce = 3f;
-    private int currentHealth;
+    [SerializeField] private float maxHealthSlime = 3f;
+    private HealthbarSlime healthbar;
+    private float currentHealth;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerMove = FindFirstObjectByType<MoveCharacter>();
+
+        healthbar = GetComponentInChildren<HealthbarSlime>();
     }
 
     private void Start()
     {
         lastPosition = transform.position;
-        currentHealth = maxHealth;
+        currentHealth = maxHealthSlime;
+
+        healthbar.UpdateHealth(currentHealth);
     }
 
     private void Update()
@@ -78,7 +84,7 @@ public class Enemy : MonoBehaviour, IInteractable
 
         playerMove.StartAttack();
         playerMove.StopMoving();
-        TakeDamage(1);
+        TakeDamage(damageTaken);
     }
 
     public bool CanInteract()
@@ -86,15 +92,16 @@ public class Enemy : MonoBehaviour, IInteractable
         return !isDead;
     }
 
-    private void TakeDamage(int damage)
+    private void TakeDamage(float damage)
     {
         currentHealth -= damage;
+
+        healthbar.UpdateHealth(currentHealth);
 
         ApplyKnockback();
 
         if (currentHealth <= 0)
         {
-            Debug.Log("Enemy died");
             Destroy(gameObject);
         }
     }

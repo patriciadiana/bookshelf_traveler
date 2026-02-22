@@ -6,14 +6,14 @@ public class DragonHealth : MonoBehaviour
 
     private void Awake()
     {
-        currentHealth = HealthManager.Instance.maxHealthEnemy;
+        currentHealth = HealthManager.Instance.maxHealthDragon;
     }
 
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
 
-        HealthManager.Instance.enemyHealth = currentHealth;
+        HealthManager.Instance.dragonHealth = currentHealth;
 
         if (currentHealth <= 0)
         {

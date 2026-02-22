@@ -22,5 +22,6 @@ public class BreakRockSystem : MonoBehaviour
         }
 
         InventorySystem.AddItem(rock.playerInventory, rock.rockItem);
+        Destroy(entity);
     }
 }
