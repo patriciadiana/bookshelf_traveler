@@ -26,38 +26,28 @@ public class NPCInteraction : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (dialogue == null)
+        if (dialogue == null || dialogue.isDialogueActive)
             return;
 
         InventoryComponent playerInventory = FindFirstObjectByType<InventoryComponent>();
 
         if (!hasSpokenOnce)
         {
-            DialogueSystem.Instance.HandleInteraction(dialogue);
             hasSpokenOnce = true;
-            return;
         }
-
-        if (playerInventory != null)
+        else if (playerInventory != null && playerInventory.items.Exists(item => item.itemId == "diamond"))
         {
-            ItemData diamondItem = playerInventory.items
-                .Find(item => item.itemId == "diamond");
+            ItemData diamondItem = playerInventory.items.Find(item => item.itemId == "diamond");
+            playerInventory.items.Remove(diamondItem);
 
-            if (diamondItem != null)
-            {
-                playerInventory.items.Remove(diamondItem);
+            dialogue.dialogueData = rewardDialogue;
 
-                dialogue.dialogueData = rewardDialogue;
-
-                DialogueSystem.Instance.HandleInteraction(dialogue);
-
-                StartCoroutine(GiveSwordAfterDialogue(playerInventory));
-
-                return;
-            }
+            StartCoroutine(GiveSwordAfterDialogue(playerInventory));
         }
-
-        dialogue.dialogueData = defaultDialogue;
+        else
+        {
+            dialogue.dialogueData = defaultDialogue;
+        }
 
         DialogueSystem.Instance.HandleInteraction(dialogue);
     }

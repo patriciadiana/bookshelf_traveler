@@ -7,12 +7,12 @@ public class HealthbarDragon : MonoBehaviour
 
     private void Start()
     {
-        totalHealthBar.fillAmount = HealthManager.Instance.enemyHealth;
+        totalHealthBar.fillAmount = HealthManager.Instance.dragonHealth;
     }
 
     private void Update()
     {
         totalHealthBar.fillAmount =
-            HealthManager.Instance.enemyHealth / 100f;
+            HealthManager.Instance.dragonHealth / 100f;
     }
 }

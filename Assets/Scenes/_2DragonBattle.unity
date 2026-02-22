@@ -201,8 +201,8 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 3
+  m_AngularDamping: 0
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -210,9 +210,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!212 &60640441
 SpriteRenderer:
@@ -282,7 +282,7 @@ Transform:
   m_GameObject: {fileID: 60640438}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.9, y: -4.77, z: 0}
+  m_LocalPosition: {x: -3.9, y: -4.45, z: 0}
   m_LocalScale: {x: 6, y: 7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   moveSpeed: 10
-  jumpForce: 8
+  jumpForce: 14
   attackPoint: {fileID: 670115677}
   attackRange: 1
   attackDamage: 10
@@ -370,6 +370,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &83711924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 83711925}
+  m_Layer: 0
+  m_Name: BulletPositionSide
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &83711925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83711924}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.447, y: 0.099, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1.0000594}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2116643364}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &127064207
 GameObject:
@@ -529,7 +560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.15686275, g: 0.2509804, b: 0.17254902, a: 1}
+  m_Color: {r: 0.37254903, g: 0.4862745, b: 0.29411766, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -612,7 +643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 211640166}
   m_Layer: 0
-  m_Name: BulletPosition
+  m_Name: BulletPositionFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2394,54 +2425,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   totalHealthBar: {fileID: 684530756}
   currentHealthBar: {fileID: 1067634983}
---- !u!1 &1386387093
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1386387095}
-  - component: {fileID: 1386387094}
-  m_Layer: 0
-  m_Name: HealthManagerForTesting
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1386387094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1386387093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 104aa26000d926c4a8db6ddf35232c86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthManager
-  playerHealth: 0
-  enemyHealth: 0
-  maxHealthPlayer: 5
-  maxHealthEnemy: 100
---- !u!4 &1386387095
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1386387093}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.97128, y: 43.54347, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1491033088
 GameObject:
   m_ObjectHideFlags: 0
@@ -3337,15 +3320,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShooting
   bullet: {fileID: 641080488068274605, guid: a97f133c637a0a849a733974acbe3155, type: 3}
   bulletPos: {fileID: 211640166}
-  shootInterval: 1
+  bulletPosFront: {fileID: 211640166}
+  bulletPosSide: {fileID: 83711925}
+  shootInterval: 1.2
   speed: 5
-  groundY: -5
+  groundY: -1.5
   skyY: 15
   horizontalOffset: 10
   stayOnGroundTime: 3
   stayInSkyTime: 10
   player: {fileID: 60640442}
   isAlive: 1
+  spriteRenderer: {fileID: 0}
+  frontSprite: {fileID: 3428391033546482049, guid: 1fde0992a61f5fb40b73557e19312c9b, type: 3}
+  sideSprite: {fileID: -1562478610461583125, guid: 75d938f1c3034674e818515f44b74b0b, type: 3}
 --- !u!212 &2116643363
 SpriteRenderer:
   serializedVersion: 2
@@ -3419,6 +3407,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 211640166}
+  - {fileID: 83711925}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2116643365
@@ -3467,17 +3456,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.005176842, y: 0.04404982}
+  m_Offset: {x: -0.12347756, y: -0.21919689}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 0.64}
+    oldSize: {x: 1.24, y: 0.64}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.2814604, y: 0.5595015}
+  m_Size: {x: 0.34083942, y: 0.5792945}
   m_EdgeRadius: 0
 --- !u!95 &2116643367
 Animator:
@@ -3517,4 +3506,3 @@ SceneRoots:
   - {fileID: 127064210}
   - {fileID: 1814253133}
   - {fileID: 1761770542}
-  - {fileID: 1386387095}

@@ -125,9 +125,9 @@ TextureImporter:
       name: dragon_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 0
-        width: 128
+        width: 124
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -147,9 +147,9 @@ TextureImporter:
       name: dragon_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 126
         y: 0
-        width: 128
+        width: 127
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -169,9 +169,9 @@ TextureImporter:
       name: dragon_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 253
         y: 0
-        width: 128
+        width: 124
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -191,9 +191,9 @@ TextureImporter:
       name: dragon_3
       rect:
         serializedVersion: 2
-        x: 384
+        x: 377
         y: 0
-        width: 128
+        width: 119
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -205,6 +205,28 @@ TextureImporter:
       bones: []
       spriteID: ea44697dadf386bb0800000000000000
       internalID: -4942630381886749522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_4
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 0
+        width: 119
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94e07ee93b04a8c4eb1cb6bb3abb3a3a
+      internalID: -1508161773
       vertices: []
       indices: 
       edges: []
@@ -227,6 +249,7 @@ TextureImporter:
       dragon_1: -3659253432981061226
       dragon_2: 4787528527978275672
       dragon_3: -4942630381886749522
+      dragon_4: -1508161773
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
