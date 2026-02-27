@@ -12,11 +12,6 @@ public class SlotComponent : MonoBehaviour
     {
         item = newItem;
 
-        Debug.Log(
-            $"Slot SetItem: {item.itemId}, " +
-            $"Icon: {(item.icon != null ? item.icon.name : "NULL")}"
-        );
-
         if (icon != null && item.icon != null)
         {
             icon.sprite = item.icon;
