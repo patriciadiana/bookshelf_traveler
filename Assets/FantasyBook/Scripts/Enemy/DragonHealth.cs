@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DragonHealth : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class DragonHealth : MonoBehaviour
         {
             Debug.Log("Dragon died");
             Destroy(gameObject);
+            SceneManager.LoadScene("_3CrimeBook");
         }
     }
 }
