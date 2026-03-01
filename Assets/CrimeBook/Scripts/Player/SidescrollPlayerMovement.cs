@@ -6,7 +6,6 @@ public class SidescrollPlayerMovement : MonoBehaviour
     [SerializeField] private float speed = 5f;
 
     private Animator animator;
-    private float moveDirection = 0f;
     private float? targetPositionX = null;
 
     private void Start()
