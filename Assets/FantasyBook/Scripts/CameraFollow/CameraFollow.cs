@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class CameraFollow : MonoBehaviour, ISavable
 {
     private Func<Vector3> GetCameraFollowPositionFunc;
     public PolygonCollider2D cameraBoundsCollider;
@@ -93,4 +93,41 @@ public class CameraFollow : MonoBehaviour
         return position;
     }
 
+    public void SaveData(GameSaveData saveData)
+    {
+        if (saveData.fantasyData == null)
+            saveData.fantasyData = new FantasySaveData();
+
+        if (cameraBoundsCollider != null)
+        {
+            saveData.fantasyData.cameraBoundryName =
+                cameraBoundsCollider.gameObject.name;
+        }
+    }
+
+    public void LoadData(GameSaveData saveData)
+    {
+        if (saveData.fantasyData == null)
+            return;
+
+        if (string.IsNullOrEmpty(saveData.fantasyData.cameraBoundryName))
+            return;
+
+        GameObject boundaryObj =
+            GameObject.Find(saveData.fantasyData.cameraBoundryName);
+
+        if (boundaryObj == null)
+        {
+            Debug.LogWarning("Saved camera boundary not found in scene.");
+            return;
+        }
+
+        PolygonCollider2D collider =
+            boundaryObj.GetComponent<PolygonCollider2D>();
+
+        if (collider != null)
+        {
+            UpdateCameraBounds(collider);
+        }
+    }
 }
