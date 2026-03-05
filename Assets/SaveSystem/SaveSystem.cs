@@ -51,11 +51,22 @@ public class SaveSystem : Singleton<SaveSystem>
             saveData.currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
 
             var savables = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
-                .OfType<ISavable>();
+                .OfType<ISaveable>();
 
             foreach (var savable in savables)
             {
-                savable.SaveData(saveData);
+                if (savable == null)
+                    continue;
+
+                try
+                {
+                    savable.SaveData(saveData);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogWarning($"Failed to save {savable}: {e.Message}");
+                }
+                
             }
 
             string jsonData = JsonUtility.ToJson(saveData, true);
@@ -83,11 +94,20 @@ public class SaveSystem : Singleton<SaveSystem>
             GameSaveData saveData = JsonUtility.FromJson<GameSaveData>(jsonData);
 
             var savables = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
-                .OfType<ISavable>();
+                .OfType<ISaveable>();
 
             foreach (var savable in savables)
             {
-                savable.LoadData(saveData);
+                if (savable == null) continue;
+
+                try
+                {
+                    savable.LoadData(saveData);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogWarning($"Failed to load {savable}: {e.Message}");
+                }
             }
 
             Debug.Log("Data loaded");

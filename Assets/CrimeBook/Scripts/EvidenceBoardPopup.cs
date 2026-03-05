@@ -1,7 +1,6 @@
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
-public class EvidenceBoardPopup : MonoBehaviour, IInteractable
+public class EvidenceBoardPopup : Singleton<EvidenceBoardPopup>, IInteractable
 {
     [SerializeField] private GameObject evidenceUIPanel;
     private bool isOpen = false;
@@ -21,19 +20,17 @@ public class EvidenceBoardPopup : MonoBehaviour, IInteractable
         OpenBoard();
     }
 
-    private void OpenBoard()
+    public void OpenBoard()
     {
         evidenceUIPanel.SetActive(true);
         isOpen = true;
-
-        Time.timeScale = 0f;
     }
 
     public void CloseBoard()
     {
         evidenceUIPanel.SetActive(false);
         isOpen = false;
-
-        Time.timeScale = 1f;
     }
+
+    public bool IsOpen() => isOpen;
 }

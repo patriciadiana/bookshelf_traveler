@@ -5,11 +5,13 @@ public class DialogueSystem : Singleton<DialogueSystem>
 {
     private DialogueUIController ui;
     private MoveCharacter playerMove;
+    private SidescrollPlayerMovement playerMoveSideScroll;
 
     private void Awake()
     {
         ui = DialogueUIController.Instance;
         playerMove = FindFirstObjectByType<MoveCharacter>();
+        playerMoveSideScroll = FindFirstObjectByType<SidescrollPlayerMovement>();
     }
 
     public void HandleInteraction(DialogueComponent dialogue)
@@ -24,6 +26,9 @@ public class DialogueSystem : Singleton<DialogueSystem>
     {
         if (playerMove != null)
             playerMove.SetCanMove(false);
+
+        if (playerMoveSideScroll != null)
+            playerMoveSideScroll.SetCanMove(false);
 
         dialogue.isDialogueActive = true;
         dialogue.dialogueIndex = 0;
@@ -129,5 +134,9 @@ public class DialogueSystem : Singleton<DialogueSystem>
 
         if (playerMove != null)
             playerMove.SetCanMove(true);
+
+
+        if (playerMoveSideScroll != null)
+            playerMoveSideScroll.SetCanMove(true);
     }
 }

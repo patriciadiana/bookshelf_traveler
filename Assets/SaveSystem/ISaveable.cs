@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface ISavable
+public interface ISaveable
 {
     void SaveData(GameSaveData saveData);
     void LoadData(GameSaveData saveData);

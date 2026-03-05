@@ -8,7 +8,6 @@ public class InventorySystem : Singleton<InventorySystem>
     {
         if (inventory.items.Count >= inventory.capacity)
         {
-            Debug.Log("Inventory is full");
             return;
         }
 

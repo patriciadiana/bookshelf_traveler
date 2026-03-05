@@ -36,13 +36,11 @@ public class DialogueUIController : Singleton<DialogueUIController>
 
     public void CreateChoiceButton(string choiceText, UnityEngine.Events.UnityAction onClick)
     {
-        Debug.Log("Creating button: " + choiceText);
         GameObject choiceButton = Instantiate(choiceButtonPrefab, choiceContainer);
         choiceButton.GetComponentInChildren<TextMeshProUGUI>().text = choiceText;
 
         Button btn = choiceButton.GetComponent<Button>();
         btn.onClick.AddListener(() => {
-            Debug.Log("Button clicked: " + choiceText);
             onClick?.Invoke();
         });
     }

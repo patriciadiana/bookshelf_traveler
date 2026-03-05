@@ -18,7 +18,6 @@ public class DragonHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Debug.Log("Dragon died");
             Destroy(gameObject);
             SceneManager.LoadScene("_3CrimeBook");
         }

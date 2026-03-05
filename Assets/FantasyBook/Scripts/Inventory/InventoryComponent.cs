@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryComponent : MonoBehaviour, ISavable
+public class InventoryComponent : MonoBehaviour, ISaveable
 {
     public int capacity = 3;
     public List<ItemData> items;
