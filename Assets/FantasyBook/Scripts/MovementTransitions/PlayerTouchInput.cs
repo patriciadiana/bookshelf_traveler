@@ -56,7 +56,6 @@ public class PlayerTouchInput : MonoBehaviour
         }
         else
         {
-            Debug.Log("No valid path found!");
             return;
         }
     }

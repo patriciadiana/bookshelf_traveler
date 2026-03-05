@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerSave : MonoBehaviour, ISavable
+public class PlayerSave : MonoBehaviour, ISaveable
 {
     public void LoadData(GameSaveData saveData)
     {

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour, ISavable
+public class CameraFollow : MonoBehaviour, ISaveable
 {
     private Func<Vector3> GetCameraFollowPositionFunc;
     public PolygonCollider2D cameraBoundsCollider;

@@ -29,7 +29,6 @@ public class InventoryUIController : MonoBehaviour
             }
         }
 
-        Debug.Log("Inventory full");
         return false;
     }
 
