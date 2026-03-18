@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 413cda14175d0504b98bfd07d74863af, type: 3}
+  m_Name: InnocentEmployee
+  m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
+  npcName: Randy Edwards
+  npcPortrait: {fileID: 21300000, guid: b9cca4d0a7b726b428fb04a92203bdbc, type: 3}
+  dialogueLines:
+  - Yeah, I was fired, but that doesn't mean I'd hurt anyone in that alley.
+  - I wasn't even in that part of the town.
+  - People love to suspect me, but I had nothing to do with this.
+  autoProgressLines: 010101
+  endDialogueLines: 000001
+  autoProgressDelay: 1.5
+  typingSpeed: 0.05
+  voiceSound: {fileID: 0}
+  voicePitch: 1
+  choices: []

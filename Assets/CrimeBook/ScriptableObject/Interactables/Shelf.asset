@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shelf
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
   npcName: Detective
-  npcPortrait: {fileID: 4334783836991956000, guid: 2cf7db3659f767f44ace2d7a8d5755dd, type: 3}
+  npcPortrait: {fileID: 21300000, guid: c15403911dbc81f44a8eec703d06806e, type: 3}
   dialogueLines:
   - Nothing useful in here.
   autoProgressLines: 01
