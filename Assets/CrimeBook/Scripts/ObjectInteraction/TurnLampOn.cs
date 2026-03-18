@@ -3,20 +3,15 @@ using UnityEngine;
 
 public class TurnLampOn : MonoBehaviour, IInteractable
 {
-    public Sprite lampOn;
-    public Sprite lampOff;
+    public GameObject lightSprite;
 
-    private SpriteRenderer spriteRenderer;
     private bool isOn = false;
+    private bool canInteract = true;
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
-        if(spriteRenderer != null && lampOff != null)
-        {
-            spriteRenderer.sprite = lampOff;
-        }
+        if (lightSprite != null)
+            lightSprite.SetActive(false);
     }
 
     public bool CanInteract()
@@ -24,14 +19,14 @@ public class TurnLampOn : MonoBehaviour, IInteractable
         return true;
     }
 
-    private bool canInteract = true;
-
     public void Interact()
     {
-        if (!canInteract || spriteRenderer == null) return;
+        if (!canInteract) return;
 
         isOn = !isOn;
-        spriteRenderer.sprite = isOn ? lampOn : lampOff;
+
+        if (lightSprite != null)
+            lightSprite.SetActive(isOn);
 
         StartCoroutine(ResetInteract());
     }

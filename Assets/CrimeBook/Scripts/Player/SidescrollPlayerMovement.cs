@@ -31,7 +31,7 @@ public class SidescrollPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!canMove || EvidenceBoardPopup.Instance.IsOpen())
+        if (!canMove || UIPanelPopup.Instance.IsOpen())
         {
             StopMoving();
             animator.SetBool("isWalking", false);
@@ -64,7 +64,7 @@ public class SidescrollPlayerMovement : MonoBehaviour
 
     public void SetTargetX(float x)
     {
-        if (!canMove || EvidenceBoardPopup.Instance.IsOpen())
+        if (!canMove || UIPanelPopup.Instance.IsOpen())
         {
             targetPositionX = null;
             return;

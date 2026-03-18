@@ -21,7 +21,7 @@ public class InteractionDetector : MonoBehaviour
         if (!context.performed)
             return;
 
-        if (EvidenceBoardPopup.Instance.IsOpen())
+        if (UIPanelPopup.Instance.IsOpen())
             return;
 
         Vector2 screenPos;
@@ -64,6 +64,11 @@ public class InteractionDetector : MonoBehaviour
             if (interactable.CanInteract())
             {
                 interactablesInRange.Add(interactable);
+
+                var outline = collision.GetComponent<OutlineController>();
+                if (outline != null)
+                    outline.EnableOutline();
+
                 interactionIcon.SetActive(true);
             }
         }
@@ -80,6 +85,10 @@ public class InteractionDetector : MonoBehaviour
                 interactablesInRange.Remove(interactable);
             }
         }
+
+        var outline = collision.GetComponent<OutlineController>();
+        if (outline != null)
+            outline.DisableOutline();
 
         if (interactablesInRange.Count == 0)
             interactionIcon.SetActive(false);

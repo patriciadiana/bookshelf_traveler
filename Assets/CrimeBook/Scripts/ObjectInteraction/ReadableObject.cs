@@ -16,6 +16,9 @@ public class ReadableObject : MonoBehaviour, IInteractable
 
         dialogue.dialogueData = readText;
 
-        DialogueSystem.Instance.HandleInteraction(dialogue);
+        if (!EvidencesInteraction.crimeSceneInvestigated)
+        {
+            DialogueSystem.Instance.HandleInteraction(dialogue);
+        }
     }
 }
