@@ -1165,6 +1165,60 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &2008482819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2008482821}
+  - component: {fileID: 2008482820}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2008482820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008482819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e756694af6004a40a092dad513bc9c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
+  itemsToPool:
+  - tag: EnemySpaceship
+    prefab: {fileID: 8597430223650170277, guid: 6c12c1758f2dede4f9337bcd7bc77b51, type: 3}
+    poolSize: 5
+  - tag: EnemyBullet
+    prefab: {fileID: 5675151872468966739, guid: 083f37e75b273eb48aa691140da18dea, type: 3}
+    poolSize: 10
+  - tag: PlayerBullet
+    prefab: {fileID: 3288731833600998419, guid: 10cea8b1c3150f34692741e8b70fc430, type: 3}
+    poolSize: 10
+--- !u!4 &2008482821
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008482819}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.70122, y: -0.25202, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2056288864
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,6 +1320,7 @@ SceneRoots:
   - {fileID: 1455146306}
   - {fileID: 1275563931}
   - {fileID: 1209399594}
+  - {fileID: 2008482821}
   - {fileID: 1826356100}
   - {fileID: 1292773397}
   - {fileID: 1690026287}

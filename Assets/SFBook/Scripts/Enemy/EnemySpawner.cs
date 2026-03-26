@@ -3,11 +3,14 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemy;
+    private ObjectPool objectPool;
 
     float maxSpawnRateInSeconds = 5f;
 
     private void Start()
     {
+        objectPool = FindFirstObjectByType<ObjectPool>();
+
         Invoke("SpawnEnemy", maxSpawnRateInSeconds);
 
         /*Every 15 seconds difficulty increases*/
@@ -16,11 +19,14 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
-        Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+        if (objectPool != null)
+        {
+            Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
+            Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
 
-        GameObject enemyGameObject = Instantiate(enemy);
-        enemy.transform.position = new Vector2(Random.Range(min.x, max.x), max.y);
+            GameObject enemy = objectPool.GetObjectFromPool("EnemySpaceship",
+                new Vector2(Random.Range(min.x, max.x), max.y));
+        }
 
         ScheduleNextEnemySpawn();
     }
