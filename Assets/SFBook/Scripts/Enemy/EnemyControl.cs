@@ -18,15 +18,20 @@ public class EnemyControl : MonoBehaviour
 
         if(transform.position.y < min.y)
         {
-            Destroy(gameObject);
+            ReturnToPool();
         }
+    }
+
+    private void ReturnToPool()
+    {
+        FindFirstObjectByType<ObjectPool>().ReturnObjectToPool("EnemySpaceship", gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if ((collision.tag == "Player") || (collision.tag == "PlayerBullet"))
         {
-            Destroy(gameObject);
+            ReturnToPool();
         }
     }
 }

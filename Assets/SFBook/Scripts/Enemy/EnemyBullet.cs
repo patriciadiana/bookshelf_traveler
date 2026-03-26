@@ -28,9 +28,14 @@ public class EnemyBullet : MonoBehaviour
             if ((transform.position.x < min.x) || (transform.position.x > max.x) ||
             (transform.position.y < min.y) || (transform.position.y > max.y))
             {
-                Destroy(gameObject);
+                ReturnToPool();
             }
         }
+    }
+
+    private void ReturnToPool()
+    {
+        FindFirstObjectByType<ObjectPool>().ReturnObjectToPool("EnemyBullet", gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

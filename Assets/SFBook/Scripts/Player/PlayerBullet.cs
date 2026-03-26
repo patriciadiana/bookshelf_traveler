@@ -16,15 +16,20 @@ public class PlayerBullet : MonoBehaviour
 
         if(transform.position.y > max.y)
         {
-            Destroy(gameObject);
+            ReturnToPool();
         }
+    }
+
+    private void ReturnToPool()
+    {
+        FindFirstObjectByType<ObjectPool>().ReturnObjectToPool("PlayerBullet", gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if ((collision.tag == "EnemySpaceship"))
         {
-            Destroy(gameObject);
+            ReturnToPool();
         }
     }
 }

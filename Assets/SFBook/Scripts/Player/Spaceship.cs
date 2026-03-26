@@ -10,18 +10,18 @@ public class Spaceship : MonoBehaviour
     public GameObject bulletPosition01;
     public GameObject bulletPosition02;
 
+    private ObjectPool objectPool;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        objectPool = FindFirstObjectByType<ObjectPool>();       
     }
 
     public void Shoot()
     {
-        GameObject bullet01 = Instantiate(bullet);
-        bullet01.transform.position = bulletPosition01.transform.position;
-
-        GameObject bullet02 = Instantiate(bullet);
-        bullet02.transform.position = bulletPosition02.transform.position;
+        GameObject bullet01 = objectPool.GetObjectFromPool("PlayerBullet", bulletPosition01.transform.position);
+        GameObject bullet02 = objectPool.GetObjectFromPool("PlayerBullet", bulletPosition02.transform.position);
     }
 
     private void FixedUpdate()
@@ -40,7 +40,7 @@ public class Spaceship : MonoBehaviour
     {
         if ((collision.tag == "EnemySpaceship") || (collision.tag == "EnemyBullet"))
         {
-            Destroy(gameObject);
+            objectPool.ReturnObjectToPool("Player", gameObject);
         }
     }
 }
