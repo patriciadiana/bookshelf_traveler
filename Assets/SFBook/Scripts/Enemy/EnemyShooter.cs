@@ -4,9 +4,14 @@ public class EnemyShooter : MonoBehaviour
 {
     public GameObject enemyBullet;
 
-    private void Start()
+    private void OnEnable()
     {
-        Invoke("FireEnemyBullet", 1f);
+        InvokeRepeating("FireEnemyBullet", 1f, 2f);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
     }
 
     private void FireEnemyBullet()

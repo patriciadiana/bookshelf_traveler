@@ -12,6 +12,8 @@ public class Spaceship : MonoBehaviour
 
     private ObjectPool objectPool;
 
+    private int health = 3;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -38,7 +40,18 @@ public class Spaceship : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collision.tag == "EnemySpaceship") || (collision.tag == "EnemyBullet"))
+        if(collision.tag == "EnemyBullet")
+        {
+            health--;
+            collision.GetComponent<EnemyBullet>()?.SendMessage("ReturnToPool");
+
+            if (health <= 0)
+            {
+                objectPool.ReturnObjectToPool("Player", gameObject);
+            }
+        }
+
+        if (collision.tag == "EnemySpaceship")
         {
             objectPool.ReturnObjectToPool("Player", gameObject);
         }

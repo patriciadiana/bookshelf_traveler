@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 public class EnemyControl : MonoBehaviour
 {
     float speed = 2f;
+    private int health = 2;
 
     private void Update()
     {
@@ -29,7 +30,19 @@ public class EnemyControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collision.tag == "Player") || (collision.tag == "PlayerBullet"))
+        if (collision.tag == "PlayerBullet")
+        {
+            health--;
+
+            FindFirstObjectByType<ObjectPool>().ReturnObjectToPool("PlayerBullet", collision.gameObject);
+
+            if (health <= 0)
+            {
+                ReturnToPool();
+            }
+        }
+
+        if (collision.tag == "Player")
         {
             ReturnToPool();
         }
