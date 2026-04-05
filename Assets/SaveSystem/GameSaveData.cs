@@ -22,4 +22,7 @@ public class FantasySaveData
 public class CrimeSaveData
 {
     public Vector3 playerPosition;
+    public string cameraBoundryName;
+
+    public bool isInSuspectMode;
 }

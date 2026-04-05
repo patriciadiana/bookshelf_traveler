@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5662860297612437235}
   - component: {fileID: 2844700223807396181}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HealthBarEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 2530919275247003461}
   - component: {fileID: 1192790564248244974}
   - component: {fileID: 1096806357277118079}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: EnemyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 6862944337338006223}
   - component: {fileID: 3453287876602587477}
   - component: {fileID: 2847051065894657761}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SlimeEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,6 +326,7 @@ MonoBehaviour:
   speed: 1.2
   distanceOffset: 6
   knockbackForce: 10
+  maxHealthSlime: 3
 --- !u!114 &3453287876602587477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,7 +389,7 @@ GameObject:
   - component: {fileID: 5222735023655998458}
   - component: {fileID: 8832298644022475089}
   - component: {fileID: 2626869266478340825}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: HealthbarCurrent (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +464,7 @@ GameObject:
   - component: {fileID: 7228223503862608762}
   - component: {fileID: 3859329493670457504}
   - component: {fileID: 1137252268006891913}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: HealthbarTotal
   m_TagString: Untagged
   m_Icon: {fileID: 0}

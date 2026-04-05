@@ -1,12 +1,10 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public class MissingClueInteraction : MonoBehaviour
 {
     [SerializeField] PolygonCollider2D newSceneCollider;
     [SerializeField] GameObject player;
-    [SerializeField] BackgroundTouchDetector backgroundTouchDetector;
 
     public DialogueComponent dialogue;
     public NPCDialogue missingClueText;
@@ -25,9 +23,10 @@ public class MissingClueInteraction : MonoBehaviour
 
         gameObject.SetActive(false);
 
-        if (backgroundTouchDetector != null)
+        SaveStateManager stateManager = FindFirstObjectByType<SaveStateManager>();
+        if (stateManager != null)
         {
-            backgroundTouchDetector.enabled = true;
+            stateManager.isInSuspectMode = true;
         }
 
         SceneTransitions.Instance.StartTransitionWithoutPlayer(player, newSceneCollider);

@@ -4,7 +4,12 @@ using UnityEngine.UIElements;
 public class EnemyControl : MonoBehaviour
 {
     float speed = 2f;
-    private int health = 2;
+    private EnemySpaceshipHealth health;
+
+    private void Awake()
+    {
+        health = GetComponent<EnemySpaceshipHealth>();
+    }
 
     private void Update()
     {
@@ -32,19 +37,19 @@ public class EnemyControl : MonoBehaviour
     {
         if (collision.tag == "PlayerBullet")
         {
-            health--;
+            health.TakeDamage(1u);
 
             FindFirstObjectByType<ObjectPool>().ReturnObjectToPool("PlayerBullet", collision.gameObject);
-
-            if (health <= 0)
-            {
-                ReturnToPool();
-            }
         }
 
         if (collision.tag == "Player")
         {
             ReturnToPool();
         }
+    }
+
+    private void OnDeath()
+    {
+        ReturnToPool();
     }
 }
