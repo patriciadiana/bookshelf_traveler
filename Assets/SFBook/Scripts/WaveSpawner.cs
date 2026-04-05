@@ -6,47 +6,62 @@ public class Wave
 {
     public string waveName;
     public int enemiesToSpawn;
-    public GameObject[] typeOfEnemies;
+
+    public GameObject[] enemyPrefabs;
+    public string[] enemyTags;
+
     public float spawnInterval;
 }
 
 public class WaveSpawner : MonoBehaviour
 {
     public Wave[] waves;
+
     private ObjectPool objectPool;
 
-    private Wave currentWave;
-    private int currentWaveNumber;
+    private int currentWaveNumber = 0;
     private float nextSpawnTime;
 
     private bool canSpawn = true;
+    private int enemiesRemainingToSpawn;
 
     public TextMeshProUGUI waveText;
 
     private void Start()
     {
-        UpdateWaveText();
-        objectPool = FindFirstObjectByType<ObjectPool>();
+        objectPool = ObjectPool.Instance;
+        StartWave();
     }
 
     private void Update()
     {
-        currentWave = waves[currentWaveNumber];
         SpawnWave();
-        GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("EnemySpaceship");
 
-        if(totalEnemies.Length == 0 && !canSpawn && currentWaveNumber + 1 != waves.Length)
+        int totalEnemies = 0;
+
+        foreach (string tag in waves[currentWaveNumber].enemyTags)
+        {
+            totalEnemies += GameObject.FindGameObjectsWithTag(tag).Length;
+        }
+
+        if (totalEnemies == 0 && !canSpawn && currentWaveNumber + 1 < waves.Length)
         {
             SpawnNextWave();
         }
     }
 
-    private void SpawnNextWave()
+    private void StartWave()
     {
-        currentWaveNumber++;
+        enemiesRemainingToSpawn = waves[currentWaveNumber].enemiesToSpawn;
         canSpawn = true;
 
         UpdateWaveText();
+    }
+
+    private void SpawnNextWave()
+    {
+        currentWaveNumber++;
+        StartWave();
     }
 
     private void UpdateWaveText()
@@ -56,27 +71,31 @@ public class WaveSpawner : MonoBehaviour
 
     private void SpawnWave()
     {
-        GameObject enemyPrefab = currentWave.typeOfEnemies[Random.Range(0, currentWave.typeOfEnemies.Length)];
-        if(canSpawn && nextSpawnTime < Time.time)
+        Wave currentWave = waves[currentWaveNumber];
+
+        if (!canSpawn || Time.time < nextSpawnTime)
+            return;
+
+        int index = Random.Range(0, currentWave.enemyPrefabs.Length);
+
+        string tag = currentWave.enemyTags[index];
+
+        Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
+        Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+
+        Vector2 spawnPos = new Vector2(Random.Range(min.x, max.x), max.y);
+
+        GameObject enemy = objectPool.GetObjectFromPool(tag, spawnPos);
+
+        if (enemy != null)
         {
-            if (objectPool != null)
+            enemiesRemainingToSpawn--;
+            nextSpawnTime = Time.time + currentWave.spawnInterval;
+
+            if (enemiesRemainingToSpawn <= 0)
             {
-                Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
-                Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
-
-                GameObject enemy = objectPool.GetObjectFromPool(enemyPrefab.name,
-                    new Vector2(Random.Range(min.x, max.x), max.y));
-
-                currentWave.enemiesToSpawn--;
-
-                nextSpawnTime = Time.time + currentWave.spawnInterval;
-
-                if(currentWave.enemiesToSpawn == 0)
-                {
-                    canSpawn = false;
-                }
+                canSpawn = false;
             }
         }
     }
-
 }

@@ -944,6 +944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4adaced30aa08a244b4f1a764928cd41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShowFPS
+  fps: 0
   FPSCounterText: {fileID: 0}
 --- !u!114 &188546173
 MonoBehaviour:
@@ -1907,7 +1908,7 @@ GameObject:
   - component: {fileID: 466554957}
   - component: {fileID: 466554960}
   - component: {fileID: 466554961}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2664,7 +2665,7 @@ GameObject:
   - component: {fileID: 526568443}
   - component: {fileID: 526568446}
   - component: {fileID: 526568447}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WoodenSignToDragon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3327,7 +3328,7 @@ MonoBehaviour:
   interactionIcon: {fileID: 1903176723}
   interactableLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!58 &737654076
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -33857,7 +33858,7 @@ GameObject:
   - component: {fileID: 1459845161}
   - component: {fileID: 1459845162}
   - component: {fileID: 1459845163}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BlacksmithNPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}

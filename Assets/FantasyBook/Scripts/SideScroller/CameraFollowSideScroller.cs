@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraFollowSideScroller : MonoBehaviour
+public class CameraFollowSideScroller : MonoBehaviour, ISaveable
 {
     public Transform target;
     public float smoothSpeed = 5f;
@@ -68,5 +68,45 @@ public class CameraFollowSideScroller : MonoBehaviour
     public void UpdateBoundaryBounds()
     {
         CalculateBoundaryBounds();
+    }
+
+    public void SaveData(GameSaveData saveData)
+    {
+        if (saveData.crimeData == null)
+            saveData.crimeData = new CrimeSaveData();
+
+        if (boundaryCollider != null)
+        {
+            saveData.crimeData.cameraBoundryName =
+                boundaryCollider.gameObject.name;
+        }
+    }
+
+    public void LoadData(GameSaveData saveData)
+    {
+        if (saveData.crimeData == null)
+            return;
+
+        if (string.IsNullOrEmpty(saveData.crimeData.cameraBoundryName))
+            return;
+
+        GameObject boundaryObj =
+            GameObject.Find(saveData.crimeData.cameraBoundryName);
+
+        if (boundaryObj == null)
+        {
+            Debug.LogWarning("Saved camera boundary not found in scene.");
+            return;
+        }
+
+        PolygonCollider2D collider =
+            boundaryObj.GetComponent<PolygonCollider2D>();
+
+        if (collider != null)
+        {
+            boundaryCollider = collider;
+            useBoundary = true;
+            UpdateBoundaryBounds();
+        }
     }
 }

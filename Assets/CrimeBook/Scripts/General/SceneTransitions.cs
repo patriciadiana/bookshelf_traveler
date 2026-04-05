@@ -13,11 +13,34 @@ public class SceneTransitions : Singleton<SceneTransitions>
         StartCoroutine(FadeTransitionWithoutPlayerCoroutine(player, newCollider));
     }
 
+    public IEnumerator StartCameraTransition(Transform targetCameraPosition)
+    {
+        yield return StartCoroutine(CameraTransitionCoroutine(targetCameraPosition));
+    }
+
+    IEnumerator CameraTransitionCoroutine(Transform targetCameraPosition)
+    {
+        yield return StartCoroutine(ScreenFader.Instance.FadeOutCoroutine());
+
+        Camera.main.transform.position = new Vector3(
+            targetCameraPosition.position.x,
+            targetCameraPosition.position.y,
+            Camera.main.transform.position.z
+        );
+
+        yield return new WaitForSeconds(0.3f);
+
+        yield return StartCoroutine(ScreenFader.Instance.FadeInCoroutine());
+    }
+
     IEnumerator FadeTransitionWithoutPlayerCoroutine(GameObject player, PolygonCollider2D newCollider)
     {
         yield return StartCoroutine(ScreenFader.Instance.FadeOutCoroutine());
 
-        player.GetComponent<SidescrollPlayerMovement>().enabled = false;
+        if (player != null)
+        {
+            player.GetComponent<SidescrollPlayerMovement>().enabled = false;
+        }
 
         if (newCollider != null)
         {

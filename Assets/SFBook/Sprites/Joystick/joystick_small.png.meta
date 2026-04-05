@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 58f13118abcbcaa47baf81a7be45ce0f
+guid: c3815a329f18126438ac7cc6f35d9365
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4511956882682952790
-    second: joystick_circle_nub_a_0
+      213: -5089859856295098204
+    second: joystick_small_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: joystick_circle_nub_a_0
+      name: joystick_small_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 13
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aa3cdcdde1f4261c0800000000000000
-      internalID: -4511956882682952790
+      spriteID: 4a8820d8d6f2d59b0800000000000000
+      internalID: -5089859856295098204
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      joystick_circle_nub_a_0: -4511956882682952790
+      joystick_small_0: -5089859856295098204
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

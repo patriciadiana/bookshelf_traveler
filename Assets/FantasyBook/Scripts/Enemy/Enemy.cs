@@ -94,6 +94,7 @@ public class Enemy : MonoBehaviour, IInteractable
 
     private void TakeDamage(float damage)
     {
+        Debug.Log("aici");
         currentHealth -= damage;
 
         healthbar.UpdateHealth(currentHealth);

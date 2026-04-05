@@ -21,10 +21,12 @@ public class EnemyShooter : MonoBehaviour
         if (playerShip != null)
         {
             GameObject bullet = Instantiate(enemyBullet);
-
             bullet.transform.position = transform.position;
 
             Vector2 direction = playerShip.transform.position - bullet.transform.position;
+
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            bullet.transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
 
             bullet.GetComponent<EnemyBullet>().SetDirection(direction);
         }
