@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class SpaceInteriorInteraction : MonoBehaviour, IInteractable
+public class EnemiesIncomingInteraction : MonoBehaviour, IInteractable
 {
     public Transform newCameraPos;
     public DialogueComponent dialogue;

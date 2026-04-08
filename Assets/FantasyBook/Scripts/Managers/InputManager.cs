@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [DefaultExecutionOrder(-1)]
-public class InputManager : Singleton<InputManager>
+public class InputManager : SingletonPersistent<InputManager> 
 {
     public delegate void StartTouchEvent(Vector2 position, float time);
     public event StartTouchEvent OnStartTouch;
@@ -13,17 +13,20 @@ public class InputManager : Singleton<InputManager>
 
     private void Awake()
     {
+        base.Awake();
         touchControl = new TouchControl();
     }
 
     private void OnEnable()
     {
-        touchControl.Enable();
+        if (touchControl != null)
+            touchControl.Enable();
     }
 
     private void OnDisable()
     {
-        touchControl.Disable();
+        if (touchControl != null)
+            touchControl.Disable();
     }
 
     private void Start()
