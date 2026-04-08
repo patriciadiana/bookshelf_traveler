@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Spaceship : MonoBehaviour
 {
@@ -13,11 +15,21 @@ public class Spaceship : MonoBehaviour
     private ObjectPool objectPool;
 
     private int health = 3;
+    public static event Action OnSpaceshipDied;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         objectPool = FindFirstObjectByType<ObjectPool>();       
+    }
+
+    /*Only for debugging*/
+    public void OnShoot(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Shoot();
+        }
     }
 
     public void Shoot()
@@ -47,13 +59,13 @@ public class Spaceship : MonoBehaviour
 
             if (health <= 0)
             {
-                objectPool.ReturnObjectToPool("Player", gameObject);
+                GameOverEvent.TriggerGameOver();
             }
         }
 
         if (collision.tag == "EnemySpaceship")
         {
-            objectPool.ReturnObjectToPool("Player", gameObject);
+            GameOverEvent.TriggerGameOver();
         }
     }
 }

@@ -26,18 +26,38 @@ public class Singleton<T> : MonoBehaviour
         }
     }
 }
-    public class SingletonPersistent<T> : MonoBehaviour 
-    where T : Component
+public class SingletonPersistent<T> : MonoBehaviour
+where T : Component
 {
-    public static T Instance {  get; private set; }
+    private static T _instance;
+    public static T Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindFirstObjectByType<T>();
+                if (_instance == null)
+                {
+                    GameObject obj = new GameObject(typeof(T).Name);
+                    _instance = obj.AddComponent<T>();
+                    DontDestroyOnLoad(obj);
+                }
+            }
+            return _instance;
+        }
+        private set => _instance = value;
+    }
 
     public virtual void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this as T;
-            DontDestroyOnLoad(this);
-        } else {
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
             Destroy(gameObject);
         }
     }

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b166cc10346e7e249bc5e6f70181dc10
+guid: d731e0508d08e5e4dba05fb4c4d2a888
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -140821870225735800
-    second: Screenshot_1_0
+      213: -1761803706754430813
+    second: spaceship_interior_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Screenshot_1_0
+      name: spaceship_interior_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 794
-        height: 522
+        width: 576
+        height: 324
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 88fb6905143bb0ef0800000000000000
-      internalID: -140821870225735800
+      spriteID: 3a88fe6fcd0dc87e0800000000000000
+      internalID: -1761803706754430813
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Screenshot_1_0: -140821870225735800
+      spaceship_interior_0: -1761803706754430813
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
