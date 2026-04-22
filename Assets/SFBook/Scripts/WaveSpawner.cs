@@ -11,11 +11,13 @@ public class Wave
     public string[] enemyTags;
 
     public float spawnInterval;
+    public bool isBossWave = false;
 }
 
 public class WaveSpawner : MonoBehaviour
 {
     public Wave[] waves;
+    public GameObject bossPrefab;
 
     private ObjectPool objectPool;
 
@@ -66,12 +68,26 @@ public class WaveSpawner : MonoBehaviour
 
     private void UpdateWaveText()
     {
-        waveText.text = waves[currentWaveNumber].waveName;
+        if (waveText != null)
+        {
+            waveText.text = $"{waves[currentWaveNumber].waveName}";
+        }
     }
 
     private void SpawnWave()
     {
         Wave currentWave = waves[currentWaveNumber];
+
+        if (currentWave.isBossWave)
+        {
+            if (canSpawn && enemiesRemainingToSpawn > 0)
+            {
+                SpawnBoss();
+                enemiesRemainingToSpawn = 0;
+                canSpawn = false;
+            }
+            return;
+        }
 
         if (!canSpawn || Time.time < nextSpawnTime)
             return;
@@ -85,7 +101,8 @@ public class WaveSpawner : MonoBehaviour
 
         Vector2 spawnPos = new Vector2(Random.Range(min.x, max.x), max.y);
 
-        GameObject enemy = objectPool.GetObjectFromPool(tag, spawnPos);
+        GameObject enemy = objectPool.GetObjectFromPool(tag);
+        enemy.transform.position = spawnPos;
 
         if (enemy != null)
         {
@@ -97,5 +114,14 @@ public class WaveSpawner : MonoBehaviour
                 canSpawn = false;
             }
         }
+    }
+
+    private void SpawnBoss()
+    {
+        Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+
+        Vector2 spawnPosition = new Vector2(0f, max.y + 3f);
+
+        Instantiate(bossPrefab, spawnPosition, Quaternion.Euler(0, 0, 180));
     }
 }

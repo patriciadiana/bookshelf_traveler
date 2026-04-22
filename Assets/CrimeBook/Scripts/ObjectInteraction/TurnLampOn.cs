@@ -7,6 +7,7 @@ public class TurnLampOn : MonoBehaviour, IInteractable
 
     private bool isOn = false;
     private bool canInteract = true;
+    private bool playerInRange = false;
 
     private void Awake()
     {
@@ -16,12 +17,12 @@ public class TurnLampOn : MonoBehaviour, IInteractable
 
     public bool CanInteract()
     {
-        return true;
+        return playerInRange && canInteract;
     }
 
     public void Interact()
     {
-        if (!canInteract) return;
+        if (!CanInteract()) return;
 
         isOn = !isOn;
 
@@ -36,5 +37,21 @@ public class TurnLampOn : MonoBehaviour, IInteractable
         canInteract = false;
         yield return new WaitForSeconds(0.1f);
         canInteract = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
     }
 }

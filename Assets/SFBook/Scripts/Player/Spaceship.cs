@@ -14,53 +14,54 @@ public class Spaceship : MonoBehaviour
 
     private ObjectPool objectPool;
 
-    private int health = 3;
-    public static event Action OnSpaceshipDied;
+    [SerializeField] private int maxHealth = 3;
+    private int currentHealth;
+
+    public static event Action<float> OnHealthChanged;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        objectPool = FindFirstObjectByType<ObjectPool>();       
+        objectPool = FindFirstObjectByType<ObjectPool>();
+        currentHealth = maxHealth;
+
+        OnHealthChanged?.Invoke(currentHealth);
     }
 
-    /*Only for debugging*/
     public void OnShoot(InputAction.CallbackContext context)
     {
         if (context.performed)
-        {
             Shoot();
-        }
     }
 
     public void Shoot()
     {
-        GameObject bullet01 = objectPool.GetObjectFromPool("PlayerBullet", bulletPosition01.transform.position);
-        GameObject bullet02 = objectPool.GetObjectFromPool("PlayerBullet", bulletPosition02.transform.position);
+        GameObject bullet01 = objectPool.GetObjectFromPool("PlayerBullet");
+        bullet01.transform.position = bulletPosition01.transform.position;
+
+        GameObject bullet02 = objectPool.GetObjectFromPool("PlayerBullet");
+        bullet02.transform.position = bulletPosition02.transform.position;
     }
 
     private void FixedUpdate()
     {
-        if(joystick.joystickVector.y != 0)
-        {
+        if (joystick.joystickVector.y != 0)
             rb.linearVelocity = new Vector2(joystick.joystickVector.x * speed, joystick.joystickVector.y * speed);
-        }
         else
-        {
             rb.linearVelocity = Vector2.zero;
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "EnemyBullet")
+        if (collision.tag == "EnemyBullet")
         {
-            health--;
-            collision.GetComponent<EnemyBullet>()?.SendMessage("ReturnToPool");
+            currentHealth--;
+            collision.GetComponent<Bullet>().ReturnToPool();
 
-            if (health <= 0)
-            {
+            OnHealthChanged?.Invoke(currentHealth);
+
+            if (currentHealth <= 0)
                 GameOverEvent.TriggerGameOver();
-            }
         }
 
         if (collision.tag == "EnemySpaceship")

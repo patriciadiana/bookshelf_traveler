@@ -10,6 +10,7 @@ TagManager:
   - EnemyBullet
   - GreenEnemy
   - RedEnemy
+  - FinalBossSpaceship
   layers:
   - Default
   - TransparentFX

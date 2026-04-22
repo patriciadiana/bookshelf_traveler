@@ -13,10 +13,12 @@ public class ObjectPool : Singleton<ObjectPool>
 {
     public List<PoolItem> itemsToPool;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
+    private Dictionary<string, GameObject> prefabDictionary;
 
     private void Awake()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
+        prefabDictionary = new Dictionary<string, GameObject>();
 
         foreach (PoolItem item in itemsToPool)
         {
@@ -30,26 +32,32 @@ public class ObjectPool : Singleton<ObjectPool>
             }
 
             poolDictionary.Add(item.tag, objectPool);
+            prefabDictionary.Add(item.tag, item.prefab);
         }
     }
 
-    public GameObject GetObjectFromPool(string tag, Vector3 position)
+    public GameObject GetObjectFromPool(string tag)
     {
         if (!poolDictionary.ContainsKey(tag))
         {
-            Debug.LogWarning("Pool with tag '" + tag + "' doesn't exist!");
             return null;
         }
 
         Queue<GameObject> poolQueue = poolDictionary[tag];
 
-        GameObject objectToGet = poolQueue.Dequeue();
+        GameObject objectToGet;
+
+        if (poolQueue.Count == 0)
+        {
+            GameObject prefab = prefabDictionary[tag];
+            objectToGet = Instantiate(prefab);
+        }
+        else
+        {
+            objectToGet = poolQueue.Dequeue();
+        }
 
         objectToGet.SetActive(true);
-        objectToGet.transform.position = position;
-
-        poolQueue.Enqueue(objectToGet);
-
         return objectToGet;
     }
 
@@ -62,5 +70,6 @@ public class ObjectPool : Singleton<ObjectPool>
         }
 
         obj.SetActive(false);
+        poolDictionary[tag].Enqueue(obj);
     }
 }

@@ -28,7 +28,7 @@ public class EnemyShooter : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             bullet.transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
 
-            bullet.GetComponent<EnemyBullet>().SetDirection(direction);
+            bullet.GetComponent<Bullet>().SetDirection(direction);
         }
     }
 }

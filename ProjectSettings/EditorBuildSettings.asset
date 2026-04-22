@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 35cd7bd31a231df4a87642e29e596f61
+  - enabled: 1
+    path: Assets/Scenes/Cutscene.unity
+    guid: 9f7ce7c1523c13f44b0c9a7ff1d07c92
+  - enabled: 1
     path: Assets/Scenes/_1FantasyBook.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
@@ -14,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/_3CrimeBook.unity
     guid: ccd8ff36e602c1e47a5d09a08794d4b7
+  - enabled: 1
+    path: Assets/Scenes/_4SFBook.unity
+    guid: 59d126365f80f7d45aed2d9353b9f40d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarEnemySpaceship : MonoBehaviour
+public class HealthbarEnemySpaceship : MonoBehaviour
 {
     [SerializeField] private Image totalHealthBar;
     [SerializeField] private EnemySpaceshipHealth health;

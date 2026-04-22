@@ -6,7 +6,6 @@ public class CameraFollowSideScroller : MonoBehaviour, ISaveable
     public float smoothSpeed = 5f;
     public Vector3 offset;
 
-    [Header("Boundary Settings")]
     public bool useBoundary = false;
     public PolygonCollider2D boundaryCollider;
 
@@ -20,6 +19,8 @@ public class CameraFollowSideScroller : MonoBehaviour, ISaveable
         }
     }
 
+    private Vector3 velocity = Vector3.zero;
+
     void LateUpdate()
     {
         if (target == null) return;
@@ -30,16 +31,21 @@ public class CameraFollowSideScroller : MonoBehaviour, ISaveable
             transform.position.z
         );
 
-        Vector3 smoothedPosition = Vector3.Lerp(
+        Vector3 smoothedPosition = Vector3.SmoothDamp(
             transform.position,
             desiredPosition,
-            smoothSpeed * Time.deltaTime
+            ref velocity,
+            0.1f
         );
 
         if (useBoundary && boundaryCollider != null)
         {
             smoothedPosition = ConstrainToBoundary(smoothedPosition);
         }
+
+        float ppu = 100f;
+        smoothedPosition.x = Mathf.Round(smoothedPosition.x * ppu) / ppu;
+        smoothedPosition.y = Mathf.Round(smoothedPosition.y * ppu) / ppu;
 
         transform.position = smoothedPosition;
     }

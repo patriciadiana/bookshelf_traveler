@@ -16,7 +16,7 @@ MonoBehaviour:
   npcPortrait: {fileID: 5118936737195724037, guid: c17b4b3c8af5e194ebb1121684e9eda9, type: 3}
   dialogueLines:
   - Here is your sword. Go north and free the village from the dragon.
-  autoProgressLines: 00
+  autoProgressLines: 01
   endDialogueLines: 01
   autoProgressDelay: 1.5
   typingSpeed: 0.05

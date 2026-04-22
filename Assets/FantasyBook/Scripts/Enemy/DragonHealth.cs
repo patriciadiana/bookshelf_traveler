@@ -3,7 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class DragonHealth : MonoBehaviour
 {
-   public float currentHealth { get; private set; }
+    public float currentHealth { get; private set; }
+
+    public Sprite[] cutsceneSlides;
+    public float slideDuration = 2f;
+    public string nextSceneName = "_3CrimeBook";
 
     private void Awake()
     {
@@ -18,8 +22,18 @@ public class DragonHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
-            SceneManager.LoadScene("_3CrimeBook");
+            HandleDragonDeath();
         }
+    }
+
+    void HandleDragonDeath()
+    {
+        CutsceneData.slides = cutsceneSlides;
+        CutsceneData.slideDuration = slideDuration;
+        CutsceneData.nextScene = nextSceneName;
+
+        SceneManager.LoadScene("Cutscene");
+
+        Destroy(gameObject);
     }
 }

@@ -10,11 +10,12 @@ public class PlayerSave : MonoBehaviour, ISaveable
         if (sceneName == "_1FantasyBook")
         {
             if (saveData.fantasyData == null) return;
+
             transform.position = saveData.fantasyData.playerPosition;
         }
         else if (sceneName == "_3CrimeBook")
         {
-            if (saveData.crimeData == null) return;
+            if(saveData.crimeData == null) return;
 
             transform.position = saveData.crimeData.playerPosition;
 

@@ -1,5 +1,4 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public class EnemiesIncomingInteraction : MonoBehaviour, IInteractable
@@ -7,12 +6,17 @@ public class EnemiesIncomingInteraction : MonoBehaviour, IInteractable
     public Transform newCameraPos;
     public DialogueComponent dialogue;
     public NPCDialogue readText;
+    public NPCDialogue afterBattleText;
 
     public GameObject UIControls;
     public GameObject waveSpawner;
 
+    public SFSaveLoadData saveData;
+
     private void Start()
     {
+        saveData = FindFirstObjectByType<SFSaveLoadData>();
+
         UIControls.SetActive(false);
         waveSpawner.SetActive(false);
     }
@@ -27,6 +31,12 @@ public class EnemiesIncomingInteraction : MonoBehaviour, IInteractable
         if (dialogue == null) return;
 
         dialogue.dialogueData = readText;
+
+        if (saveData != null && saveData.enteredBattleMode)
+        {
+            dialogue.dialogueData = afterBattleText;
+        }
+
         DialogueSystem.Instance.HandleInteraction(dialogue);
 
         StartCoroutine(WaitForDialogue());
@@ -42,6 +52,10 @@ public class EnemiesIncomingInteraction : MonoBehaviour, IInteractable
 
         UIControls.SetActive(true);
         waveSpawner.SetActive(true);
+
+        if (saveData != null)
+            saveData.enteredBattleMode = true;
+
         gameObject.SetActive(false);
     }
 }

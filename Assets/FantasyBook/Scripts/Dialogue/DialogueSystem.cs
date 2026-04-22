@@ -7,6 +7,8 @@ public class DialogueSystem : Singleton<DialogueSystem>
     private MoveCharacter playerMove;
     private SidescrollPlayerMovement playerMoveSideScroll;
 
+    private DialogueComponent activeDialogue;
+
     private void Awake()
     {
         ui = DialogueUIController.Instance;
@@ -16,14 +18,22 @@ public class DialogueSystem : Singleton<DialogueSystem>
 
     public void HandleInteraction(DialogueComponent dialogue)
     {
+        if (activeDialogue != null && activeDialogue != dialogue)
+            return;
+
         if (dialogue.isDialogueActive)
-            NextLine(dialogue);
+            NextLine();
         else
             StartDialogue(dialogue);
     }
 
     public void StartDialogue(DialogueComponent dialogue)
     {
+        if (activeDialogue != null)
+            return;
+
+        activeDialogue = dialogue;
+
         if (playerMove != null)
             playerMove.SetCanMove(false);
 
@@ -39,16 +49,22 @@ public class DialogueSystem : Singleton<DialogueSystem>
         );
 
         ui.ShowDialogueUI(true);
-        DisplayCurrentLine(dialogue);
+        DisplayCurrentLine();
     }
 
-    void NextLine(DialogueComponent dialogue)
+    void NextLine()
     {
+        if (activeDialogue == null)
+            return;
+
+        var dialogue = activeDialogue;
+
         if (dialogue.isTyping)
         {
             StopAllCoroutines();
             ui.SetDialogueText(dialogue.dialogueData.dialogueLines[dialogue.dialogueIndex]);
             dialogue.isTyping = false;
+            return;
         }
 
         ui.ClearChoices();
@@ -56,7 +72,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
         if (dialogue.dialogueData.endDialogueLines.Length > dialogue.dialogueIndex &&
             dialogue.dialogueData.endDialogueLines[dialogue.dialogueIndex])
         {
-            EndDialogue(dialogue);
+            EndDialogue();
             return;
         }
 
@@ -64,7 +80,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
         {
             if (choice.dialogueIndex == dialogue.dialogueIndex)
             {
-                DisplayChoice(dialogue, choice);
+                DisplayChoice(choice);
                 return;
             }
         }
@@ -72,19 +88,24 @@ public class DialogueSystem : Singleton<DialogueSystem>
         dialogue.dialogueIndex++;
 
         if (dialogue.dialogueIndex < dialogue.dialogueData.dialogueLines.Length)
-            DisplayCurrentLine(dialogue);
+            DisplayCurrentLine();
         else
-            EndDialogue(dialogue);
+            EndDialogue();
     }
 
-    void DisplayCurrentLine(DialogueComponent dialogue)
+    void DisplayCurrentLine()
     {
+        if (activeDialogue == null)
+            return;
+
         StopAllCoroutines();
-        StartCoroutine(TypeLine(dialogue));
+        StartCoroutine(TypeLine());
     }
 
-    IEnumerator TypeLine(DialogueComponent dialogue)
+    IEnumerator TypeLine()
     {
+        var dialogue = activeDialogue;
+
         dialogue.isTyping = true;
         ui.SetDialogueText("");
 
@@ -102,41 +123,57 @@ public class DialogueSystem : Singleton<DialogueSystem>
             dialogue.dialogueData.autoProgressLines[dialogue.dialogueIndex])
         {
             yield return new WaitForSeconds(dialogue.dialogueData.autoProgressDelay);
-            NextLine(dialogue);
+            NextLine();
         }
     }
 
-    void DisplayChoice(DialogueComponent dialogue, DialogueChoice choice)
+    void DisplayChoice(DialogueChoice choice)
     {
+        var dialogue = activeDialogue;
+
         for (int i = 0; i < choice.choices.Length; i++)
         {
             int nextIndex = choice.nextDialogueIndex[i];
+
             ui.CreateChoiceButton(
                 choice.choices[i],
-                () => ChooseOption(dialogue, nextIndex)
+                () => ChooseOption(nextIndex)
             );
         }
     }
 
-    void ChooseOption(DialogueComponent dialogue, int nextIndex)
+    void ChooseOption(int nextIndex)
     {
-        dialogue.dialogueIndex = nextIndex;
+        if (activeDialogue == null)
+            return;
+
+        activeDialogue.dialogueIndex = nextIndex;
         ui.ClearChoices();
-        DisplayCurrentLine(dialogue);
+        DisplayCurrentLine();
     }
 
-    public void EndDialogue(DialogueComponent dialogue)
+    public void EndDialogue()
     {
+        if (activeDialogue == null)
+            return;
+
         StopAllCoroutines();
-        dialogue.isDialogueActive = false;
+
+        activeDialogue.isDialogueActive = false;
+        activeDialogue = null;
+
         ui.SetDialogueText("");
         ui.ShowDialogueUI(false);
 
         if (playerMove != null)
             playerMove.SetCanMove(true);
 
-
         if (playerMoveSideScroll != null)
             playerMoveSideScroll.SetCanMove(true);
+    }
+
+    public bool IsDialogueActive()
+    {
+        return activeDialogue != null;
     }
 }
