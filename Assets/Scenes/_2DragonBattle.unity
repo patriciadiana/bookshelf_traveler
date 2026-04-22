@@ -3285,6 +3285,8 @@ MonoBehaviour:
   target: {fileID: 60640442}
   smoothSpeed: 5
   offset: {x: 0, y: 0, z: 0}
+  useBoundary: 0
+  boundaryCollider: {fileID: 0}
 --- !u!1 &2116643361
 GameObject:
   m_ObjectHideFlags: 0
@@ -3422,6 +3424,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccdbd801e8687b144aae1ada5a42d748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragonHealth
+  cutsceneSlides:
+  - {fileID: 4093529123795720158, guid: 727499688c1b2804bad751f2a8ddbcf3, type: 3}
+  - {fileID: -3218644999118768396, guid: 175230a1611934b41b0c55dbe6240a07, type: 3}
+  - {fileID: 1177578112082225661, guid: a2d49899b7466f447a88aa9280224ad8, type: 3}
+  slideDuration: 2
+  nextSceneName: _3CrimeBook
 --- !u!61 &2116643366
 BoxCollider2D:
   m_ObjectHideFlags: 0

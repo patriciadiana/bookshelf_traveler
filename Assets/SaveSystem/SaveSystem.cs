@@ -3,13 +3,13 @@ using System.Collections;
 using System.IO;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.InputManagerEntry;
 
 public class SaveSystem : Singleton<SaveSystem>
 {
     private string saveFilePath;
     private float autosaveInterval = 5f;
     private Coroutine autoSaveCoroutine;
+    public bool allowSaving = true;
 
     public GameObject player;
 
@@ -38,12 +38,22 @@ public class SaveSystem : Singleton<SaveSystem>
         while (true)
         {
             yield return new WaitForSeconds(autosaveInterval);
+
+            if (!allowSaving)
+                continue;
+
             SaveData();
         }
     }
 
     public void SaveData()
     {
+        if (!allowSaving)
+        {
+            Debug.Log("Save blocked (cutscene or loading)");
+            return;
+        }
+
         try
         {
             GameSaveData saveData = new GameSaveData();
@@ -118,4 +128,33 @@ public class SaveSystem : Singleton<SaveSystem>
         }
     }
 
+    public GameSaveData GetSaveData()
+    {
+        if (!File.Exists(saveFilePath))
+            return null;
+
+        try
+        {
+            string jsonData = File.ReadAllText(saveFilePath);
+            return JsonUtility.FromJson<GameSaveData>(jsonData);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Failed to read save: " + e.Message);
+            return null;
+        }
+    }
+
+    public void DeleteSave()
+    {
+        if (File.Exists(saveFilePath))
+        {
+            File.Delete(saveFilePath);
+            Debug.Log("Save file deleted");
+        }
+        else
+        {
+            Debug.Log("No save file to delete");
+        }
+    }
 }

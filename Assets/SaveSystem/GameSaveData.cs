@@ -8,6 +8,7 @@ public class GameSaveData
 
     public FantasySaveData fantasyData;
     public CrimeSaveData crimeData;
+    public SFSaveData sfData;
 }
 
 [System.Serializable]
@@ -25,4 +26,10 @@ public class CrimeSaveData
     public string cameraBoundryName;
 
     public bool isInSuspectMode;
+}
+
+[System.Serializable]
+public class SFSaveData
+{
+    public bool enteredBattleMode;
 }

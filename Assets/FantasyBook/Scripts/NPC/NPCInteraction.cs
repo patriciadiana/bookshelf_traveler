@@ -65,6 +65,6 @@ public class NPCInteraction : MonoBehaviour, IInteractable
 
     public void Close()
     {
-        DialogueSystem.Instance.EndDialogue(dialogue);
+        DialogueSystem.Instance.EndDialogue();
     }
 }

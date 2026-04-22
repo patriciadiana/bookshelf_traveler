@@ -6,19 +6,34 @@ public class OpenDoor : MonoBehaviour, IInteractable
     [SerializeField] GameObject player;
     [SerializeField] PolygonCollider2D newSceneCollider;
 
+    private bool playerInRange = false;
+
     public bool CanInteract()
     {
-        return true;
+        return playerInRange && EvidencesInteraction.crimeSceneInvestigated;
     }
 
     public void Interact()
     {
-        if (!EvidencesInteraction.crimeSceneInvestigated)
-        {
-            return;
-        }
+        if (!CanInteract()) return;
 
         SceneTransitions.Instance.StartTransition(player, targetPosition, newSceneCollider);
         EvidencesInteraction.crimeSceneInvestigated = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
     }
 }

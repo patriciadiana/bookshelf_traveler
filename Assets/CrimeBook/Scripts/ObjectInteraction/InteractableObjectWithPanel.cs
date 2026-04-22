@@ -20,7 +20,7 @@ public class InteractableObjectWithPanel : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (dialogue == null) return;
+        if (!CanInteract()) return;
 
         dialogue.dialogueData = readText;
         DialogueSystem.Instance.HandleInteraction(dialogue);

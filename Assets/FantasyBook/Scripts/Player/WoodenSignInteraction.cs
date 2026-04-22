@@ -14,7 +14,7 @@ public class WoodenSignInteraction : MonoBehaviour, IInteractable
     }
     public bool CanInteract()
     {
-        return dialogue != null && !dialogue.isDialogueActive;
+        return dialogue != null && !DialogueSystem.Instance.IsDialogueActive();
     }
 
     public void Interact()

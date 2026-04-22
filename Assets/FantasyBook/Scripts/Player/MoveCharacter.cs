@@ -30,7 +30,7 @@ public class MoveCharacter : MonoBehaviour
 
     private void HandleMovement()
     {
-        if (/*canMove &&*/ pathVectorList != null && currentPathIndex < pathVectorList.Count)
+        if (canMove && pathVectorList != null && currentPathIndex < pathVectorList.Count)
         {
             Vector3 targetPosition = pathVectorList[currentPathIndex];
 
@@ -105,7 +105,7 @@ public class MoveCharacter : MonoBehaviour
     public void SetCanMove(bool value)
     {
         canMove = value;
-        //if (!canMove) StopMoving();
+        if (!canMove) StopMoving();
     }
 
     public bool GetIsAttacking()

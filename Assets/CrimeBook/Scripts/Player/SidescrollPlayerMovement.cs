@@ -7,7 +7,7 @@ public class SidescrollPlayerMovement : MonoBehaviour
     private Animator animator;
     private float? targetPositionX = null;
     private float lastDirection = 1f;
-    private bool canMove = true;
+    public bool canMove = true;
 
     private Rigidbody2D rb;
 
