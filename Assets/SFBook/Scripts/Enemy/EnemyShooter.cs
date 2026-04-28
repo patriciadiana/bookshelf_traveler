@@ -23,6 +23,8 @@ public class EnemyShooter : MonoBehaviour
             GameObject bullet = Instantiate(enemyBullet);
             bullet.transform.position = transform.position;
 
+            SoundManager.PlaySound(SoundType.SF_ENEMY_BULLET);
+
             Vector2 direction = playerShip.transform.position - bullet.transform.position;
 
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

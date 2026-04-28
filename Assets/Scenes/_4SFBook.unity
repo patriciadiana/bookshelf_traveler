@@ -2054,6 +2054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf0834b29b51e64688273d608d3906b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveSystem
+  allowSaving: 1
   player: {fileID: 0}
 --- !u!114 &1498610780
 MonoBehaviour:

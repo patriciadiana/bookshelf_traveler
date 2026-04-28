@@ -50,6 +50,8 @@ public class EnemiesIncomingInteraction : MonoBehaviour, IInteractable
             SceneTransitions.Instance.StartCameraTransition(newCameraPos)
         );
 
+        SoundManager.Instance.StopLoopSound();
+
         UIControls.SetActive(true);
         waveSpawner.SetActive(true);
 

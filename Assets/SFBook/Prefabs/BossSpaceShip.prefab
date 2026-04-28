@@ -410,6 +410,7 @@ GameObject:
   - component: {fileID: 4261272186163045528}
   - component: {fileID: 1272806875752942936}
   - component: {fileID: 4673201090392663853}
+  - component: {fileID: 1865074860861243219}
   m_Layer: 0
   m_Name: BossSpaceShip
   m_TagString: FinalBossSpaceship
@@ -559,7 +560,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.7, y: 3.76}
+    oldSize: {x: 3.6999998, y: 3.793945}
     newSize: {x: 3.7, y: 3.76}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -600,3 +601,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpaceshipHealth
   maxHealth: 30
+--- !u!95 &1865074860861243219
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8597430223650170277}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52a1522bde07e6f42b63631e6841f6f5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -58,6 +58,7 @@ public class EnemyBossShooter : MonoBehaviour
             return;
         }
 
+        SoundManager.PlaySound(SoundType.SF_ENEMY_BULLET);
         bullet.transform.position = transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         bullet.transform.rotation = Quaternion.Euler(0, 0, angle - 90f);

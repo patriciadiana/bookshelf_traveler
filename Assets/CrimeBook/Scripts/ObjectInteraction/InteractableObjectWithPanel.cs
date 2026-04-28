@@ -6,6 +6,11 @@ public static class PanelEvents
     public static System.Action OnClosePanel;
 }
 
+public static class InteractionState
+{
+    public static bool IsUIOpen;
+}
+
 public class InteractableObjectWithPanel : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject panelToShow;
@@ -15,12 +20,16 @@ public class InteractableObjectWithPanel : MonoBehaviour, IInteractable
 
     public bool CanInteract()
     {
-        return dialogue != null && !dialogue.isDialogueActive;
+        return dialogue != null
+            && !dialogue.isDialogueActive
+            && !InteractionState.IsUIOpen;
     }
 
     public void Interact()
     {
         if (!CanInteract()) return;
+
+        InteractionState.IsUIOpen = true;
 
         dialogue.dialogueData = readText;
         DialogueSystem.Instance.HandleInteraction(dialogue);

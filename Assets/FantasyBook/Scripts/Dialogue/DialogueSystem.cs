@@ -114,6 +114,10 @@ public class DialogueSystem : Singleton<DialogueSystem>
         foreach (char c in line)
         {
             ui.SetDialogueText(ui.dialogueText.text += c);
+
+            if(dialogue.dialogueData.voiceSound != null)
+                SoundManager.PlayVoice(dialogue.dialogueData.voiceSound, dialogue.dialogueData.voicePitch);
+
             yield return new WaitForSeconds(dialogue.dialogueData.typingSpeed);
         }
 

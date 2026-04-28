@@ -8,6 +8,7 @@ public class SidescrollPlayerMovement : MonoBehaviour
     private float? targetPositionX = null;
     private float lastDirection = 1f;
     public bool canMove = true;
+    private UIPanelPopup UIpopup;
 
     private Rigidbody2D rb;
 
@@ -15,6 +16,9 @@ public class SidescrollPlayerMovement : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        UIpopup = FindFirstObjectByType<UIPanelPopup>();
+
+        SoundManager.PlayMusic(MusicType.CRIME_AMBIENT);
     }
 
     private void Update()
@@ -31,7 +35,7 @@ public class SidescrollPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!canMove || UIPanelPopup.Instance.IsOpen())
+        if (!canMove || UIpopup.IsOpen())
         {
             StopMoving();
             animator.SetBool("isWalking", false);
@@ -64,7 +68,7 @@ public class SidescrollPlayerMovement : MonoBehaviour
 
     public void SetTargetX(float x)
     {
-        if (!canMove || UIPanelPopup.Instance.IsOpen())
+        if (!canMove || UIpopup.IsOpen())
         {
             targetPositionX = null;
             return;

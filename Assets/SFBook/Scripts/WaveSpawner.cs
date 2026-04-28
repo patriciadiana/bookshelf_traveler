@@ -123,5 +123,7 @@ public class WaveSpawner : MonoBehaviour
         Vector2 spawnPosition = new Vector2(0f, max.y + 3f);
 
         Instantiate(bossPrefab, spawnPosition, Quaternion.Euler(0, 0, 180));
+
+        SoundManager.PlayMusic(MusicType.SF_BOSS_BATTLE);
     }
 }

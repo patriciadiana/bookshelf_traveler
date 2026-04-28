@@ -41,6 +41,8 @@ public class Spaceship : MonoBehaviour
 
         GameObject bullet02 = objectPool.GetObjectFromPool("PlayerBullet");
         bullet02.transform.position = bulletPosition02.transform.position;
+
+        SoundManager.PlaySound(SoundType.SF_SPACESHIP_BULLET);
     }
 
     private void FixedUpdate()
@@ -56,6 +58,9 @@ public class Spaceship : MonoBehaviour
         if (collision.tag == "EnemyBullet")
         {
             currentHealth--;
+
+            SoundManager.PlaySound(SoundType.SF_DAMAGE);
+
             collision.GetComponent<Bullet>().ReturnToPool();
 
             OnHealthChanged?.Invoke(currentHealth);

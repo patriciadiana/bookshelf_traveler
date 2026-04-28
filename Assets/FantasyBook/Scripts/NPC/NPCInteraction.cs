@@ -59,6 +59,7 @@ public class NPCInteraction : MonoBehaviour, IInteractable
             yield return null;
         }
 
+        SoundManager.PlaySound(SoundType.F_ITEM_EQUIP);
         InventorySystem.AddItem(playerInventory, swordItem);
     }
 

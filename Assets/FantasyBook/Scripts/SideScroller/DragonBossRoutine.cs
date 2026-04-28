@@ -17,6 +17,9 @@ public class DragonBossRoutine : MonoBehaviour
     public float stayOnGroundTime = 5f;
     public float stayInSkyTime = 5f;
 
+    private float lastWingSoundTime;
+    [SerializeField] private float wingSoundCooldown = 0.5f;
+
     [Header("References")]
     public Transform player;
 
@@ -57,6 +60,20 @@ public class DragonBossRoutine : MonoBehaviour
 
         HandleMovement();
         HandleShooting();
+        HandleWingsSound();
+    }
+
+    void HandleWingsSound()
+    {
+        bool isFlying = currentState != State.Grounded;
+
+        if (!isFlying) return;
+
+        if (Time.time > lastWingSoundTime + wingSoundCooldown)
+        {
+            SoundManager.PlaySound(SoundType.F_DRAGON_WINGS);
+            lastWingSoundTime = Time.time;
+        }
     }
 
     void HandleMovement()

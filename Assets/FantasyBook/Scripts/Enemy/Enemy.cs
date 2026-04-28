@@ -22,6 +22,12 @@ public class Enemy : MonoBehaviour, IInteractable
     private HealthbarSlime healthbar;
     private float currentHealth;
 
+    [SerializeField] private float minMoveSpeedForSound = 0.1f;
+    [SerializeField] private Vector2 moveSoundCooldownRange = new Vector2(0.3f, 0.7f);
+
+    private float lastMoveSoundTime;
+    private float currentMoveCooldown;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -59,6 +65,21 @@ public class Enemy : MonoBehaviour, IInteractable
     {
         Vector2 direction = (player.transform.position - transform.position).normalized;
         rb.linearVelocity = direction * speed;
+
+        float currentSpeed = rb.linearVelocity.magnitude;
+
+        if (currentSpeed > minMoveSpeedForSound &&
+            Time.time > lastMoveSoundTime + currentMoveCooldown)
+        {
+            SoundManager.PlaySound(SoundType.F_SLIME_MOVE);
+
+            lastMoveSoundTime = Time.time;
+
+            currentMoveCooldown = Random.Range(
+                moveSoundCooldownRange.x,
+                moveSoundCooldownRange.y
+            );
+        }
     }
 
     /*Function for when the player leaves the range*/
@@ -96,12 +117,15 @@ public class Enemy : MonoBehaviour, IInteractable
     {
         currentHealth -= damage;
 
+        SoundManager.PlaySound(SoundType.F_DAMAGE);
+
         healthbar.UpdateHealth(currentHealth);
 
         ApplyKnockback();
 
         if (currentHealth <= 0)
         {
+            SoundManager.PlaySound(SoundType.F_SLIME_DEATH);
             Destroy(gameObject);
         }
     }

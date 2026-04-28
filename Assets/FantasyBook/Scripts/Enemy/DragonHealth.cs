@@ -18,10 +18,13 @@ public class DragonHealth : MonoBehaviour
     {
         currentHealth -= damage;
 
+        SoundManager.PlaySound(SoundType.F_DAMAGE);
+
         HealthManager.Instance.dragonHealth = currentHealth;
 
         if (currentHealth <= 0)
         {
+            /*todo dragon death sound*/
             HandleDragonDeath();
         }
     }
@@ -32,6 +35,7 @@ public class DragonHealth : MonoBehaviour
         CutsceneData.slideDuration = slideDuration;
         CutsceneData.nextScene = nextSceneName;
 
+        SoundManager.PlayMusic(MusicType.DRAGON_VICTORY);
         SceneManager.LoadScene("Cutscene");
 
         Destroy(gameObject);

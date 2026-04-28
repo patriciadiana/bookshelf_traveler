@@ -7,6 +7,7 @@ public class InteractionDetector : MonoBehaviour
     private List<IInteractable> interactablesInRange = new List<IInteractable>();
     public GameObject interactionIcon;
     public LayerMask interactableLayers;
+    private UIPanelPopup UIpopup;
 
     private Camera mainCamera;
 
@@ -14,6 +15,7 @@ public class InteractionDetector : MonoBehaviour
     {
         interactionIcon.SetActive(false);
         mainCamera = Camera.main;
+        UIpopup = FindFirstObjectByType<UIPanelPopup>();
     }
 
     public void OnInteract(InputAction.CallbackContext context)
@@ -21,7 +23,7 @@ public class InteractionDetector : MonoBehaviour
         if (!context.performed)
             return;
 
-        if (UIPanelPopup.Instance.IsOpen())
+        if (UIpopup != null && UIpopup.IsOpen())
             return;
 
         Vector2 screenPos;

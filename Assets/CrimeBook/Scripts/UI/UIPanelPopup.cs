@@ -1,10 +1,10 @@
 using TMPro;
 using UnityEngine;
 
-public class UIPanelPopup : Singleton<UIPanelPopup>, IInteractable
+public class UIPanelPopup : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject UIPanel;
-    private bool isOpen = false;
+    public bool isOpen = false;
     [SerializeField] private TextMeshProUGUI panelText;
 
     private void OnEnable()
@@ -52,6 +52,7 @@ public class UIPanelPopup : Singleton<UIPanelPopup>, IInteractable
         if (UIPanel != null)
             UIPanel.SetActive(true);
         isOpen = true;
+        InteractionState.IsUIOpen = true;
     }
 
     public void CloseBoard()
@@ -59,6 +60,7 @@ public class UIPanelPopup : Singleton<UIPanelPopup>, IInteractable
         if (UIPanel != null)
             UIPanel.SetActive(false);
         isOpen = false;
+        InteractionState.IsUIOpen = false;
     }
 
     public bool IsOpen() => isOpen;

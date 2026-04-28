@@ -17,6 +17,9 @@ public class PlayerSideScrollerMovement : MonoBehaviour
     private float moveDirection = 0f;
     private float lastDirection = 1f;
 
+    private float lastFootstepTime;
+    [SerializeField] private float footstepCooldown = 0.4f;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,7 +36,14 @@ public class PlayerSideScrollerMovement : MonoBehaviour
     private void Update()
     {
         if (moveDirection != 0)
+        {
+            if (Time.time > lastFootstepTime + footstepCooldown)
+            {
+                SoundManager.PlaySound(SoundType.F_FOOTSTEPS_DRAGON);
+                lastFootstepTime = Time.time;
+            }
             lastDirection = moveDirection;
+        }
 
         animator.SetBool("isWalking", moveDirection != 0);
 
@@ -49,6 +59,8 @@ public class PlayerSideScrollerMovement : MonoBehaviour
 
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
+            SoundManager.PlaySound(SoundType.F_JUMP);
+
             isJumping = true;
         }
     }
@@ -58,6 +70,8 @@ public class PlayerSideScrollerMovement : MonoBehaviour
         if (isAttacking) return;
 
         isAttacking = true;
+
+        SoundManager.PlaySound(SoundType.F_SWORD_DASH);
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(
             attackPoint.position,

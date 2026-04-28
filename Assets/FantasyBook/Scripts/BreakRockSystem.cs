@@ -10,6 +10,8 @@ public class BreakRockSystem : MonoBehaviour
 
         rock.hits--;
 
+        SoundManager.PlaySound(SoundType.F_HITTING_ROCK);
+
         if (rock.hits > 0)
             return;
 
@@ -21,7 +23,9 @@ public class BreakRockSystem : MonoBehaviour
             renderer.sprite = rock.brokenSprite;
         }
 
+        SoundManager.PlaySound(SoundType.F_ITEM_EQUIP);
         InventorySystem.AddItem(rock.playerInventory, rock.rockItem);
+
         Destroy(entity);
     }
 }
