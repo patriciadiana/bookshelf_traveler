@@ -7,13 +7,16 @@ public class ShowAlarm : MonoBehaviour
 
     private void Start()
     {
-        WaitToShowAlarm();
-
-        alarm.SetActive(true);
+        alarm.SetActive(false);
+        StartCoroutine(WaitToShowAlarm());
     }
 
     IEnumerator WaitToShowAlarm()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(4);
+
+        alarm.SetActive(true);
+
+        SoundManager.Instance.PlayLoopSound(SoundType.SF_ALARM);
     }
 }

@@ -11,32 +11,39 @@ public class EvidencesInteraction : MonoBehaviour
 
     public static bool crimeSceneInvestigated = false;
 
+    [SerializeField] private SoundType interactSound;
+
     public void SuspectInteraction()
     {
         dialogue.dialogueData = suspectText;
+        SoundManager.PlaySound(interactSound);
         DialogueSystem.Instance.HandleInteraction(dialogue);
     }
 
     public void WeaponInteraction()
     {
         dialogue.dialogueData = weaponText;
+        SoundManager.PlaySound(interactSound);
         DialogueSystem.Instance.HandleInteraction(dialogue);
     }
 
     public void CrimeSceneInteraction()
     {
         dialogue.dialogueData = crimeSceneText;
+        SoundManager.PlaySound(interactSound);
         DialogueSystem.Instance.HandleInteraction(dialogue);
         crimeSceneInvestigated = true;
     }
     public void SuspectsInteraction()
     {
         dialogue.dialogueData = suspectsText;
+        SoundManager.PlaySound(interactSound);
         DialogueSystem.Instance.HandleInteraction(dialogue);
     }
     public void WitnessStatementInteraction()
     {
         dialogue.dialogueData = witnessStatementText;
+        SoundManager.PlaySound(interactSound);
         DialogueSystem.Instance.HandleInteraction(dialogue);
     }
 }

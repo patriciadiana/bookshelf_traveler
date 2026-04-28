@@ -23,6 +23,7 @@ public class GameOverManager : MonoBehaviour
     private void ShowGameOver()
     {
         gameOverPanel.SetActive(true);
+        SoundManager.PlayMusic(MusicType.GAME_OVER);
         Time.timeScale = 0f;
     }
 

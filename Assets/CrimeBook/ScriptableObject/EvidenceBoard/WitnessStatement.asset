@@ -15,7 +15,7 @@ MonoBehaviour:
   npcName: Detective
   npcPortrait: {fileID: 21300000, guid: c15403911dbc81f44a8eec703d06806e, type: 3}
   dialogueLines:
-  - The convenience store woman says she were just doing their job like normal.
+  - The convenience store woman says she was just doing their job like normal.
   - She heard a noise, saw a man and called the police.
   - But she also admited she didn't see the suspect's face...So I can't rule her
     out.
@@ -23,6 +23,6 @@ MonoBehaviour:
   endDialogueLines: 000001
   autoProgressDelay: 1.5
   typingSpeed: 0.05
-  voiceSound: {fileID: 0}
+  voiceSound: {fileID: 8300000, guid: c20a2a0d5d8874e498242ac39c51a817, type: 3}
   voicePitch: 1
   choices: []

@@ -14,6 +14,8 @@ public class EnemySpaceshipHealth : MonoBehaviour
     {
         currentHealth -= damage;
 
+        SoundManager.PlaySound(SoundType.SF_DAMAGE);
+
         if (currentHealth <= 0)
         {
             DestroyEnemy();

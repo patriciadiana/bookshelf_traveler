@@ -19,6 +19,8 @@ public class FireballScript : MonoBehaviour
 
         float rotation = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotation - 90);
+
+        SoundManager.PlaySound(SoundType.F_FIREBALL);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

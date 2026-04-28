@@ -14,6 +14,8 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= damage;
 
+        SoundManager.PlaySound(SoundType.F_TAKE_DAMAGE);
+
         HealthManager.Instance.playerHealth = currentHealth;
 
         if (currentHealth <= 0)

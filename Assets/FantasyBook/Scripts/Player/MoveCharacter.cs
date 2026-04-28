@@ -14,11 +14,15 @@ public class MoveCharacter : MonoBehaviour
 
     public CameraFollow cameraFollow;
 
+    private float footstepTimer;
+    private float footstepInterval = 0.4f;
+
     private bool isAttacking = false;
     private bool canMove = true;
 
     private void Start()
     {
+        SoundManager.PlayMusic(MusicType.FANTASY_AMBIENT);
         animator = GetComponent<Animator>();
         cameraFollow.Setup(() => transform.position);
     }
@@ -43,6 +47,13 @@ public class MoveCharacter : MonoBehaviour
             lastMoveDirection = currentMoveDirection;
 
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+
+            footstepTimer -= Time.deltaTime;
+            if (footstepTimer <= 0f)
+            {
+                SoundManager.PlaySound(SoundType.F_FOOTSTEPS);
+                footstepTimer = footstepInterval;
+            }
 
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
@@ -121,5 +132,13 @@ public class MoveCharacter : MonoBehaviour
     public bool IsMoving()
     {
         return pathVectorList != null && currentPathIndex < pathVectorList.Count;
+    }
+
+    public void PlayFootstep()
+    {
+        if (IsMoving())
+        {
+            SoundManager.PlaySound(SoundType.F_FOOTSTEPS);
+        }
     }
 }

@@ -5,6 +5,8 @@ public class ReadableObject : MonoBehaviour, IInteractable
     public DialogueComponent dialogue;
     public NPCDialogue readText;
 
+    [SerializeField] private SoundType interactSound;
+
     private bool playerInRange = false;
 
     public bool CanInteract()
@@ -15,6 +17,8 @@ public class ReadableObject : MonoBehaviour, IInteractable
     public void Interact()
     {
         if (!CanInteract()) return;
+
+        SoundManager.PlaySound(interactSound);
 
         dialogue.dialogueData = readText;
 

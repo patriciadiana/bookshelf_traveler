@@ -5,12 +5,15 @@ public class MapTransition : MonoBehaviour
 {
     [SerializeField] PolygonCollider2D mapBoundry;
     [SerializeField] Direction direction;
+    [SerializeField] AreaType areaType;
     [SerializeField] Transform teleportTargetPosition;
     [SerializeField] float additivePos = 2f;
 
     private CameraFollow cameraFollow;
 
     enum Direction { Up, Down, Left, Right, Teleport }
+
+    enum AreaType { None, Cave, Town }
 
     private void Awake()
     {
@@ -24,18 +27,33 @@ public class MapTransition : MonoBehaviour
             StartCoroutine(FadeTransitionCoroutine(collision.gameObject));
 
             MoveCharacter move = collision.GetComponent<MoveCharacter>();
-            if (move != null)
-            {
-                move.StopMoving();
-            }
         }
     }
 
     IEnumerator FadeTransitionCoroutine(GameObject player)
     {
+        MoveCharacter move = player.GetComponent<MoveCharacter>();
+
+        if (move != null)
+        {
+            move.SetCanMove(false);   
+            move.StopMoving();       
+        }
+
         yield return StartCoroutine(ScreenFader.Instance.FadeOutCoroutine());
 
         UpdatePlayerPosition(player);
+
+        switch (areaType)
+        {
+            case AreaType.Cave:
+                SoundManager.PlayMusic(MusicType.CAVE_AMBIENT);
+                break;
+
+            case AreaType.Town:
+                SoundManager.PlayMusic(MusicType.FANTASY_AMBIENT);
+                break;
+        }
 
         if (cameraFollow != null && mapBoundry != null)
         {
@@ -43,9 +61,12 @@ public class MapTransition : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.3f);
-
         yield return StartCoroutine(ScreenFader.Instance.FadeInCoroutine());
 
+        if (move != null)
+        {
+            move.SetCanMove(true);
+        }
     }
 
     private void UpdatePlayerPosition(GameObject player)

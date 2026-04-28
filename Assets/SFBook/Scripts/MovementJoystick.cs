@@ -36,8 +36,6 @@ public class MovementJoystick : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        //joystick.transform.position = eventData.position;
-        //joystickBackground.transform.position = eventData.position;
         joystickTouchPos = eventData.position;
     }
 
@@ -45,6 +43,5 @@ public class MovementJoystick : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     {
         joystickVector = Vector2.zero;
         joystick.transform.position = joystickOriginalPos;
-        //joystickBackground.transform.position = joystickOriginalPos;
     }
 }
