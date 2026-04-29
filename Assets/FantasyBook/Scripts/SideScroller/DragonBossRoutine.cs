@@ -47,6 +47,7 @@ public class DragonBossRoutine : MonoBehaviour
 
     private void Start()
     {
+        SoundManager.PlayMusic(MusicType.DRAGON_BATTLE);
         initialPos = transform.position;
         skyPos = new Vector3(transform.position.x, skyY, transform.position.z);
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -175,13 +176,8 @@ public class DragonBossRoutine : MonoBehaviour
 
     void HandleShooting()
     {
-        if (currentState == State.InSky || currentState == State.Grounded)
+        if (currentState == State.InSky)
         {
-            if(currentState == State.Grounded)
-            {
-                shootInterval = 2f;
-            }
-
             shootTimer += Time.deltaTime;
             if (shootTimer > shootInterval)
             {

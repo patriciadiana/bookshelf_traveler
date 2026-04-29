@@ -11,9 +11,21 @@ public class MainMenu : MonoBehaviour
 
     public void OnPlayButton()
     {
-        GameSaveData save = SaveSystem.Instance.GetSaveData();
+        string sceneToLoad = "_1FantasyBook";
+        bool showCutscene = true;
 
-        if (save == null || save.currentScene == "_1FantasyBook")
+        if (SaveSystem.Instance != null)
+        {
+            GameSaveData save = SaveSystem.Instance.GetSaveData();
+
+            if (save != null && !string.IsNullOrEmpty(save.currentScene))
+            {
+                sceneToLoad = save.currentScene;
+                showCutscene = false;
+            }
+        }
+
+        if (showCutscene)
         {
             CutsceneData.slides = introSlides;
             CutsceneData.slideDuration = slideDuration;
@@ -23,8 +35,14 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(save.currentScene);
+            SceneManager.LoadScene(sceneToLoad);
         }
+    }
+
+    private void OnEnable()
+    {
+        if (SaveSystem.Instance != null)
+            SaveSystem.Instance.allowSaving = true;
     }
 
     public void OnOptionsButton()

@@ -13,7 +13,7 @@ public class ShowAlarm : MonoBehaviour
 
     IEnumerator WaitToShowAlarm()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(5f);
 
         alarm.SetActive(true);
 

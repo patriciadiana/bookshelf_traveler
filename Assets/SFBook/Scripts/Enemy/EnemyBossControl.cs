@@ -62,6 +62,7 @@ public class EnemyBossControl : MonoBehaviour
     {
         if (SaveSystem.Instance != null)
         {
+            SaveSystem.Instance.allowSaving = false;
             SaveSystem.Instance.DeleteSave();
         }
 

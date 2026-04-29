@@ -15,6 +15,7 @@ public class EnemiesIncomingInteraction : MonoBehaviour, IInteractable
 
     private void Start()
     {
+        SoundManager.PlayMusic(MusicType.SF_AMBIENT);
         saveData = FindFirstObjectByType<SFSaveLoadData>();
 
         UIControls.SetActive(false);

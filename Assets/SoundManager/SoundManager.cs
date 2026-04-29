@@ -35,7 +35,6 @@ public enum MusicType
     DRAGON_VICTORY,
     CRIME_AMBIENT,
     SF_AMBIENT,
-    SF_BATTLE,
     SF_BOSS_BATTLE,
     GAME_OVER
 }
@@ -67,6 +66,10 @@ public class SoundManager : MonoBehaviour
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
+
+        sfxSource.Stop();
+        musicSource.Stop();
+        voiceSource.Stop();
     }
 
 
@@ -77,6 +80,9 @@ public class SoundManager : MonoBehaviour
 
     public static void PlaySound(SoundType sound)
     {
+        if (sound == SoundType.NONE)
+            return;
+
         if (Instance.soundList.Length > (int)sound)
         {
             Instance.sfxSource.PlayOneShot(
