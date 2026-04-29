@@ -75,8 +75,6 @@ public class SuspectsManager : Singleton<SuspectsManager>
         CutsceneData.slideDuration = slideDuration;
         CutsceneData.nextScene = "_4SFBook";
 
-        SoundManager.PlayMusic(MusicType.SF_AMBIENT);
-
         SceneManager.LoadScene("Cutscene");
     }
 

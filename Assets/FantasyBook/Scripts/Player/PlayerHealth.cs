@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     private void Awake()
     {
         currentHealth = HealthManager.Instance.maxHealthPlayer;
+        HealthManager.Instance.playerHealth = currentHealth;
     }
 
     public void TakeDamage(float damage)

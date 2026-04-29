@@ -23,6 +23,8 @@ public class GameOverManager : MonoBehaviour
     private void ShowGameOver()
     {
         gameOverPanel.SetActive(true);
+
+        SoundManager.Instance.PauseMusic();
         SoundManager.PlayMusic(MusicType.GAME_OVER);
         Time.timeScale = 0f;
     }
@@ -30,6 +32,7 @@ public class GameOverManager : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f;
+        SoundManager.Instance.ResumeMusic();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

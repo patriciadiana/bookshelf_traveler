@@ -30,7 +30,6 @@ public class WoodenSignInteraction : MonoBehaviour, IInteractable
             if (swordItem != null)
             {
                 SceneManager.LoadScene("_2DragonBattle");
-                SoundManager.PlayMusic(MusicType.DRAGON_BATTLE);
                 return;
             }
             else

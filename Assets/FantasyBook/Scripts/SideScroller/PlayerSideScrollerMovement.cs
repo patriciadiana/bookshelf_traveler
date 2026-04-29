@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerSideScrollerMovement : MonoBehaviour
@@ -70,6 +71,7 @@ public class PlayerSideScrollerMovement : MonoBehaviour
         if (isAttacking) return;
 
         isAttacking = true;
+        animator.SetBool("isAttacking", true);
 
         SoundManager.PlaySound(SoundType.F_SWORD_DASH);
 
@@ -89,7 +91,14 @@ public class PlayerSideScrollerMovement : MonoBehaviour
             }
         }
 
+        StartCoroutine(ResetAttack(0.6f));
+    }
+
+    private IEnumerator ResetAttack(float time)
+    {
+        yield return new WaitForSeconds(time);
         isAttacking = false;
+        animator.SetBool("isAttacking", false);
     }
 
     public void MoveLeft()

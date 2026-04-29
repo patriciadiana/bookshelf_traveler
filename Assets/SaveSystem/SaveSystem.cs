@@ -11,8 +11,6 @@ public class SaveSystem : Singleton<SaveSystem>
     private Coroutine autoSaveCoroutine;
     public bool allowSaving = true;
 
-    public GameObject player;
-
     private void Awake()
     {
         saveFilePath = Path.Combine(Application.persistentDataPath, "saving.json");
@@ -58,31 +56,36 @@ public class SaveSystem : Singleton<SaveSystem>
         {
             GameSaveData saveData = new GameSaveData();
 
-            saveData.currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
 
-            var savables = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
-                .OfType<ISaveable>();
-
-            foreach (var savable in savables)
+            if (currentScene != "MainMenu")
             {
-                if (savable == null)
-                    continue;
+                saveData.currentScene = currentScene;
 
-                try
+                var savables = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
+                    .OfType<ISaveable>();
+
+                foreach (var savable in savables)
                 {
-                    savable.SaveData(saveData);
+                    if (savable == null)
+                        continue;
+
+                    try
+                    {
+                        savable.SaveData(saveData);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogWarning($"Failed to save {savable}: {e.Message}");
+                    }
+
                 }
-                catch (Exception e)
-                {
-                    Debug.LogWarning($"Failed to save {savable}: {e.Message}");
-                }
-                
+
+                string jsonData = JsonUtility.ToJson(saveData, true);
+                File.WriteAllText(saveFilePath, jsonData);
+
+                Debug.Log("Data saved");
             }
-
-            string jsonData = JsonUtility.ToJson(saveData, true);
-            File.WriteAllText(saveFilePath, jsonData);
-
-            Debug.Log("Data saved");
         }
         catch (Exception e)
         {
