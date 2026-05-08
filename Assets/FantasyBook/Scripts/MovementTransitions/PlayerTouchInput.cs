@@ -35,8 +35,13 @@ public class PlayerTouchInput : MonoBehaviour
 
     private void HandleTouch(Vector2 screenPosition, float time)
     {
+        if (DialogueSystem.Instance != null && DialogueSystem.Instance.IsDialogueActive())
+            return;
+
         if (moveCharacter.GetIsAttacking())
             return;
+
+        if (screenPosition == Vector2.zero) return;
 
         Vector3 touchWorldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
         touchWorldPosition.z = 0f;

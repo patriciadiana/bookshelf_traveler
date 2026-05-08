@@ -116,7 +116,14 @@ public class MoveCharacter : MonoBehaviour
     public void SetCanMove(bool value)
     {
         canMove = value;
-        if (!canMove) StopMoving();
+
+        if (!canMove)
+        {
+            StopMoving();
+
+            pathVectorList = null;
+            currentPathIndex = 0;
+        }
     }
 
     public bool GetIsAttacking()
