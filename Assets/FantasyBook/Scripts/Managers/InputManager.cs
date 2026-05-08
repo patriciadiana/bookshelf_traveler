@@ -38,10 +38,11 @@ public class InputManager : SingletonPersistent<InputManager>
 
     private void StartTouch(InputAction.CallbackContext context)
     {
-        if (OnStartTouch != null)
-        {
-            OnStartTouch(touchControl.Touch.TouchPosition.ReadValue<Vector2>(), (float)context.startTime);
-        }
+        Vector2 pos = touchControl.Touch.TouchPosition.ReadValue<Vector2>();
+
+        if (pos == Vector2.zero) return;
+
+        OnStartTouch(pos, (float)context.startTime);
     }
 
     private void EndTouch(InputAction.CallbackContext context)
