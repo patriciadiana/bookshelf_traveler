@@ -15,6 +15,11 @@ public class DialogueSystem : Singleton<DialogueSystem>
         playerMove = FindFirstObjectByType<MoveCharacter>();
         playerMoveSideScroll = FindFirstObjectByType<SidescrollPlayerMovement>();
     }
+    public void OnDialogueTap()
+    {
+        if (activeDialogue != null)
+            NextLine();
+    }
 
     public void HandleInteraction(DialogueComponent dialogue)
     {

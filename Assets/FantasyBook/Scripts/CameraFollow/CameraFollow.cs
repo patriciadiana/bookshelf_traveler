@@ -127,6 +127,15 @@ public class CameraFollow : MonoBehaviour, ISaveable
 
         if (collider != null)
         {
+            if (saveData.fantasyData.cameraBoundryName == "BoundryCaveInterior")
+            {
+                SoundManager.PlayMusic(MusicType.CAVE_AMBIENT);
+            }
+            else
+            {
+                SoundManager.PlayMusic(MusicType.FANTASY_AMBIENT);
+            }
+
             UpdateCameraBounds(collider);
         }
     }

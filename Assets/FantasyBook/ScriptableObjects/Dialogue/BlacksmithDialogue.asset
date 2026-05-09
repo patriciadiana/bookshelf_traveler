@@ -20,8 +20,8 @@ MonoBehaviour:
   - It circles the skies at dusk. Burns fields. Terrorizing the village.
   - Steel alone won't do. The only way is hidden deep in the northern cave where
     lies a rare ore.
-  - Follow the path and you shall find the cave. Beware... the cave isn't empty.
-    Slimes infest it now, guarding the ore like it's part of them.
+  - Follow the path to the cave. Beware... the slimes infest it now, guarding the
+    ore as if it were their own.
   autoProgressLines: 0101010101
   endDialogueLines: 0000000001
   autoProgressDelay: 1.5
