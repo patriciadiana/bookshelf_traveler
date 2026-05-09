@@ -2633,7 +2633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f8a7fc1011aed4dbbcbcee1bbeb5a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spaceship
-  joystick: {fileID: 0}
+  joystick: {fileID: 767489067}
   speed: 5
   bullet: {fileID: 3288731833600998419, guid: 10cea8b1c3150f34692741e8b70fc430, type: 3}
   bulletPosition01: {fileID: 2854403}
