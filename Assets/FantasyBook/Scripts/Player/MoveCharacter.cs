@@ -22,7 +22,6 @@ public class MoveCharacter : MonoBehaviour
 
     private void Start()
     {
-        SoundManager.PlayMusic(MusicType.FANTASY_AMBIENT);
         animator = GetComponent<Animator>();
         cameraFollow.Setup(() => transform.position);
     }

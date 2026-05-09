@@ -13,7 +13,7 @@ public class MapTransition : MonoBehaviour
 
     enum Direction { Up, Down, Left, Right, Teleport }
 
-    enum AreaType { None, Cave, Town }
+    public enum AreaType { None, Cave, Town }
 
     private void Awake()
     {
@@ -96,5 +96,10 @@ public class MapTransition : MonoBehaviour
         }
 
         player.transform.position = newPos;
+    }
+
+    public AreaType GetAreaType()
+    {
+        return areaType;
     }
 }
