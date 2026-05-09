@@ -185,7 +185,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -114.00488, y: 155}
+  m_AnchoredPosition: {x: -114.005005, y: 155}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9846012
@@ -348,8 +348,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -320.055, y: 0}
-  m_SizeDelta: {x: 640.11, y: 720}
+  m_AnchoredPosition: {x: -250.28632, y: 0}
+  m_SizeDelta: {x: 500.573, y: 720}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &152447288
 MonoBehaviour:
@@ -1422,6 +1422,7 @@ GameObject:
   - component: {fileID: 767489064}
   - component: {fileID: 767489066}
   - component: {fileID: 767489065}
+  - component: {fileID: 767489067}
   m_Layer: 5
   m_Name: LeftZone
   m_TagString: Untagged
@@ -1447,8 +1448,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 319.94705, y: 0}
-  m_SizeDelta: {x: 639.894, y: 720}
+  m_AnchoredPosition: {x: 282.437, y: 0}
+  m_SizeDelta: {x: 564.8739, y: 720}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &767489065
 MonoBehaviour:
@@ -1488,6 +1489,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767489063}
   m_CullTransparentMesh: 1
+--- !u!114 &767489067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767489063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f9a5ac2404ddcb459635e68b591abf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovementJoystick
+  joystick: {fileID: 832176833}
+  joystickBackground: {fileID: 1180861446}
+  joystickVector: {x: 0, y: 0}
 --- !u!1 &799844923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,7 +1685,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -184.94702, y: -205}
+  m_AnchoredPosition: {x: -147.43695, y: -205}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &832176835
@@ -1825,7 +1841,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -184.94702, y: -205}
+  m_AnchoredPosition: {x: -147.43695, y: -205}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1180861448
@@ -2617,7 +2633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f8a7fc1011aed4dbbcbcee1bbeb5a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spaceship
-  joystick: {fileID: 2056288868}
+  joystick: {fileID: 0}
   speed: 5
   bullet: {fileID: 3288731833600998419, guid: 10cea8b1c3150f34692741e8b70fc430, type: 3}
   bulletPosition01: {fileID: 2854403}
@@ -3718,7 +3734,6 @@ GameObject:
   - component: {fileID: 2056288865}
   - component: {fileID: 2056288867}
   - component: {fileID: 2056288866}
-  - component: {fileID: 2056288868}
   m_Layer: 5
   m_Name: ControlsPanel
   m_TagString: Untagged
@@ -3785,21 +3800,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056288864}
   m_CullTransparentMesh: 1
---- !u!114 &2056288868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2056288864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f9a5ac2404ddcb459635e68b591abf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MovementJoystick
-  joystick: {fileID: 832176833}
-  joystickBackground: {fileID: 1180861446}
-  joystickVector: {x: 0, y: 0}
 --- !u!1 &2126975002
 GameObject:
   m_ObjectHideFlags: 0
@@ -3887,7 +3887,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -4041604062673740648, guid: ee521d5dd06379f48a528571aaf696d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
