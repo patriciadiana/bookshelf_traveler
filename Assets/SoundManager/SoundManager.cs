@@ -72,12 +72,6 @@ public class SoundManager : MonoBehaviour
         voiceSource.Stop();
     }
 
-
-    private void Start()
-    {
-        SoundManager.PlayMusic(MusicType.TITLE_THEME);
-    }
-
     public static void PlaySound(SoundType sound)
     {
         if (sound == SoundType.NONE)

@@ -9,6 +9,11 @@ public class MainMenu : MonoBehaviour
 
     public GameObject optionsMenu;
 
+    private void Start()
+    {
+        SoundManager.PlayMusic(MusicType.TITLE_THEME);
+    }
+
     public void OnPlayButton()
     {
         string sceneToLoad = "_1FantasyBook";
